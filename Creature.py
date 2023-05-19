@@ -1,9 +1,11 @@
+''' Contains the Creature class, which is a subclass of Element.'''
+
 from Element import Element
 import theGame
 
 class Creature(Element):
     """A creature that occupies the dungeon.
-        Is an Element. Has hit points and strength."""
+        Has hit points and strength."""
 
     def __init__(self, name, hp, abbrv="", strength=1):
         Element.__init__(self, name, abbrv)

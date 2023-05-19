@@ -1,3 +1,5 @@
+''' Game module'''
+
 import random, copy
 
 from Equipment import Equipment
@@ -7,24 +9,25 @@ from Hero import Hero
 from Map import Map
 from Stairs import Stairs
 from handler import heal, teleport, throw
-from utils import getch2, _find_getch
+from utils import getch2
 import theGame
 
 class Game(object):
     """ Class representing game state """
 
-    """ available equipments """
+    # available equipments w/ their probabilities and actions / effects
+    # the key is the probability of the equipment to appear (higher key = lower probability)
     equipments = {0: [Equipment("potion", "!", usage=lambda self, hero: heal(hero))],
                   1 : [Equipment("gold", "o")],
-                  #1: [Equipment("potion", "!", usage=lambda self, hero: teleport(hero, True))],
                   2: [Equipment("bow", usage=lambda self, hero: throw(1, True))],
                   3: [Equipment("portoloin", "w", usage=lambda self, hero: teleport(hero, False))]
                   }
-    """ available monsters """
-    monsters = {0: [Creature("Goblin", 4), Creature("Bat", 2, "W")],
-                1: [Creature("Ork", 6, strength=2), Creature("Blob", 10)], 5: [Creature("Dragon", 20, strength=3)]}
 
-    """ available actions """
+    monsters = {0: [Creature("Goblin", 4), Creature("Bat", 2, "W")],
+                1: [Creature("Ork", 6, strength=2), Creature("Blob", 10)],
+                5: [Creature("Dragon", 20, strength=3)]}
+
+    #available actions w/ their key
     _actions = { 'z': lambda h: theGame.theGame()._floor.move(h, Coord(0, -1)), \
                 'q': lambda h: theGame.theGame()._floor.move(h, Coord(-1, 0)), \
                 's': lambda h: theGame.theGame()._floor.move(h, Coord(0, 1)), \

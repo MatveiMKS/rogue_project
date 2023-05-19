@@ -1,3 +1,5 @@
+''' Contains the Equipment class.'''
+
 from Element import Element
 import theGame
 
@@ -9,7 +11,7 @@ class Equipment(Element):
         self.usage = usage
 
     def meet(self, hero):
-        """Makes the hero meet an element. The hero takes the element."""
+        """Called when the hero meets an element."""
         hero.take(self)
         theGame.theGame().addMessage("You pick up a " + self.name)
         return True

@@ -1,6 +1,7 @@
+''' Base class for game elements.'''
+
 class Element(object):
-    """Base class for game elements. Have a name.
-        Abstract class."""
+    """ Abstract class."""
 
     def __init__(self, name, abbrv=""):
         self.name = name
