@@ -24,18 +24,18 @@ class Hero(Creature):
         res += '> INVENTORY : ' + str([x.name for x in self._inventory])
         return res
 
-    def checkEquipment(self, o):
-        """Check if o is an Equipment."""
-        if not isinstance(o, Equipment):
+    def checkEquipment(self, obj):
+        """Used to check if an object is a piece of equipment"""
+        if not isinstance(obj, Equipment):
             raise TypeError('Not a Equipment')
 
     def take(self, elem):
-        """The hero takes adds the equipment to its inventory"""
+        """Adds the equipment to inventory"""
         self.checkEquipment(elem)
         self._inventory.append(elem)
 
     def use(self, elem):
-        """Use a piece of equipment"""
+        """Uses a piece of equipment"""
         if elem is None:
             return
         self.checkEquipment(elem)
@@ -43,3 +43,4 @@ class Hero(Creature):
             raise ValueError('Equipment ' + elem.name + 'not in inventory')
         if elem.use(self):
             self._inventory.remove(elem)
+            return
