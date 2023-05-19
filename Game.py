@@ -84,11 +84,12 @@ class Game(object):
         """Returns a random monster."""
         return self.randElement(Game.monsters)
 
-    def select(self, l):
-        print("Choose item> " + str([str(l.index(e)) + ": " + e.name for e in l]))
-        c = getch2()
-        if c.isdigit() and int(c) in range(len(l)):
-            return l[int(c)]
+    def select(self, inventory):
+        ''' Select an item from an inventory'''
+        print("Choose item> " + str([str(inventory.index(item)) + ": " + item.name for item in inventory]))
+        key_press = getch2()
+        if key_press.isdigit() and int(key_press) in range(len(inventory)):
+            return inventory[int(key_press)]
 
     def play(self):
         """Main game loop"""
@@ -99,9 +100,9 @@ class Game(object):
             print(self._floor)
             print(self._hero.description())
             print(self.readMessages())
-            c = getch2()
-            print(c in Game._actions)
-            if c in Game._actions:
-                Game._actions[c](self._hero)
+            key_press = getch2()
+            print(key_press in Game._actions)
+            if key_press in Game._actions:
+                Game._actions[key_press](self._hero)
             self._floor.moveAllMonsters()
         print("--- Game Over ---")
