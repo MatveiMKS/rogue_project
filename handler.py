@@ -1,7 +1,9 @@
+''' Handler module for the game.'''
+
 import theGame
 
 def heal(creature, strength):
-    """Heal the creature"""
+    """Heal the creature by strength points"""
     creature.hp += strength
     return True
 
