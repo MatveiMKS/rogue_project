@@ -15,3 +15,11 @@ G5
 
 Pour essayer le projet:
 Executer le fichier main.py et puis utilisez les touches z q s d pour vous deplacer
+
+## Fonctionnalités implétementées en plus:
+
+## Fonctionnalités à implementer:
+
+- option de choix de disposition clavier (Matvei)
+- magie (Theophile)
+- interface graphique (Mat et Theo)
