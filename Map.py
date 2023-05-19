@@ -1,3 +1,5 @@
+''' Map module'''
+
 from Coord import Coord
 from Hero import Hero
 from Room import Room
@@ -12,7 +14,11 @@ class Map(object):
         Contains game elements."""
 
     ground = '.'  # A walkable ground cell
-    dir = {'z': Coord(0, -1), 's': Coord(0, 1), 'd': Coord(1, 0), 'q': Coord(-1, 0)}  # four direction user keys
+    # four direction user keys
+    dir = {'z': Coord(0, -1),
+           's': Coord(0, 1),
+           'd': Coord(1, 0),
+           'q': Coord(-1, 0)}  
     empty = ' '  # A non walkable cell
 
     def __init__(self, size=20, hero=None):
@@ -21,7 +27,7 @@ class Map(object):
         self._rooms = []
         self._roomsToReach = []
 
-        for i in range(size):
+        for _ in range(size):
             self._mat.append([Map.empty] * size)
         if hero is None:
             hero = Hero()
