@@ -10,7 +10,7 @@ def heal(creature, strength):
 def teleport(creature, unique):
     """Teleport the creature"""
     room = theGame.theGame()._floor.randRoom()
-    destination = room.randCoord()
+    destination = room.randEmptyCoord(theGame.theGame()._floor)
     theGame.theGame()._floor.rm(theGame.theGame()._floor.pos(creature))
     theGame.theGame()._floor.put(destination, creature)
     return unique
