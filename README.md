@@ -25,6 +25,6 @@ Executer le fichier main.py et puis utilisez les touches z q s d pour vous depla
 - interface graphique (Mat et Theo)
 - lock health and inventory @ 10#
 - add items:
-    -1
-    -2
-    -3
+    • Potions (small, medium, big)
+    • Weapoms (add strenght)
+    • Armor (add base resistance)
