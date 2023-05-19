@@ -23,3 +23,4 @@ Executer le fichier main.py et puis utilisez les touches z q s d pour vous depla
 - option de choix de disposition clavier (Matvei)
 - magie (Theophile)
 - interface graphique (Mat et Theo)
+- lock health and inventory @ 10
