@@ -33,7 +33,7 @@ class Game(object):
                 's': lambda h: theGame.theGame()._floor.move(h, Coord(0, 1)), \
                 'd': lambda h: theGame.theGame()._floor.move(h, Coord(1, 0)), \
                 'i': lambda h: theGame.theGame().addMessage(h.fullDescription()), \
-                'k': lambda h: h.__setattr__('hp', 0), \
+                'k': lambda h: h.kill(), \
                 'u': lambda h: h.use(theGame.theGame().select(h._inventory)), \
                 ' ': lambda h: None, \
                 'h': lambda hero: theGame.theGame().addMessage("Actions disponibles : " + str(list(Game._actions.keys()))), \
