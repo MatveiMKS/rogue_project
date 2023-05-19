@@ -12,7 +12,7 @@ from handler import heal, teleport, throw
 from utils import getch2
 import theGame
 
-class Game(object):
+class Game():
     """ Class representing game state """
 
     # available equipments w/ their probabilities and actions / effects

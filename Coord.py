@@ -1,6 +1,6 @@
 import math
 
-class Coord(object):
+class Coord():
     """Implementation of a map coordinate"""
 
     def __init__(self, x, y):

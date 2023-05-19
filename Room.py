@@ -1,10 +1,12 @@
-from Coord import Coord
-import Map
-import theGame
+'''Module to creatre a room.'''
 
 import random
 
-class Room(object):
+from Coord import Coord
+import Map as mp
+import theGame
+
+class Room():
     """A rectangular room in the map"""
 
     def __init__(self, c1, c2):
@@ -35,10 +37,10 @@ class Room(object):
 
     def randEmptyCoord(self, map):
         """A random coordinate inside the room which is free on the map."""
-        c = self.randCoord()
-        while map.get(c) != Map.Map.ground or c == self.center():
-            c = self.randCoord()
-        return c
+        coord = self.randCoord()
+        while map.get(coord) != mp.Map.ground or coord == self.center():
+            coord = self.randCoord()
+        return coord
 
     def decorate(self, map):
         """Decorates the room by adding a random equipment and monster."""

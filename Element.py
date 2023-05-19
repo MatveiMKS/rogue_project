@@ -1,6 +1,6 @@
 ''' Base class for game elements.'''
 
-class Element(object):
+class Element():
     """ Abstract class."""
 
     def __init__(self, name, abbrv=""):

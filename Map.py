@@ -9,7 +9,7 @@ from utils import sign
 
 import random
 
-class Map(object):
+class Map():
     """A map of a game floor.
         Contains game elements."""
 
