@@ -1,16 +1,16 @@
 import theGame
 
-def heal(creature):
+def heal(creature, strength):
     """Heal the creature"""
-    creature.hp += 3
+    creature.hp += strength
     return True
 
 def teleport(creature, unique):
     """Teleport the creature"""
-    r = theGame.theGame()._floor.randRoom()
-    c = r.randCoord()
+    room = theGame.theGame()._floor.randRoom()
+    destination = room.randCoord()
     theGame.theGame()._floor.rm(theGame.theGame()._floor.pos(creature))
-    theGame.theGame()._floor.put(c, creature)
+    theGame.theGame()._floor.put(destination, creature)
     return unique
 
 def throw(power, loss):
