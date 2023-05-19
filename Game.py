@@ -70,11 +70,11 @@ class Game(object):
 
     def randElement(self, collect):
         """Returns a clone of random element from a collection using exponential random law."""
-        x = random.expovariate(1 / self._level)
-        for k in collect.keys():
-            if k <= x:
-                l = collect[k]
-        return copy.copy(random.choice(l))
+        var_exp = random.expovariate(1 / self._level)
+        for rarity in collect:
+            if rarity <= var_exp:
+                items = collect[rarity]
+        return copy.copy(random.choice(items))
 
     def randEquipment(self):
         """Returns a random equipment."""
