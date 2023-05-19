@@ -63,7 +63,8 @@ class Map(object):
             self._rooms.append(r)
 
     def corridor(self, cursor, end):
-        """Digs a corridors from the coordinates cursor to the end, first vertically, then horizontally."""
+        """Digs a corridors from cursor to end, 
+        first vertically, then horizontally."""
         d = end - cursor
         self.dig(cursor)
         while cursor.y != end.y:
@@ -88,93 +89,96 @@ class Map(object):
         while len(self._roomsToReach) > 0:
             self.reach()
 
-    def randRoom(self):
+    def randRoom(self) -> Room:
         """A random room to be put on the map."""
         c1 = Coord(random.randint(0, len(self) - 3), random.randint(0, len(self) - 3))
-        c2 = Coord(min(c1.x + random.randint(3, 8), len(self) - 1), min(c1.y + random.randint(3, 8), len(self) - 1))
+        c2 = Coord(min(c1.x + random.randint(3, 8), len(self) - 1),
+                   min(c1.y + random.randint(3, 8), len(self) - 1))
         return Room(c1, c2)
 
-    def generateRooms(self, n):
-        """Generates n random rooms and adds them if non-intersecting."""
-        for i in range(n):
-            r = self.randRoom()
-            if self.intersectNone(r):
-                self.addRoom(r)
+    def generateRooms(self, amount):
+        """Generates rooms and adds them if non-intersecting."""
+        for _ in range(amount):
+            room = self.randRoom()
+            if self.intersectNone(room):
+                self.addRoom(room)
 
     def __len__(self):
         return len(self._mat)
 
     def __contains__(self, item):
+        ''' Checks if an item is in the map.
+            If the item is a Coord, checks if the coord are in the map.'''
         if isinstance(item, Coord):
             return 0 <= item.x < len(self) and 0 <= item.y < len(self)
         return item in self._elem
 
     def __repr__(self):
-        s = ""
-        for i in self._mat:
-            for j in i:
-                s += str(j)
-            s += '\n'
-        return s
+        res = ""
+        for lignes in self._mat:
+            for colonnes in lignes:
+                res += str(colonnes)
+            res += '\n'
+        return res
 
-    def checkCoord(self, c):
-        """Check if the coordinates c is valid in the map."""
-        if not isinstance(c, Coord):
+    def checkCoord(self, coord):
+        """Check if the coordinates coord is valid in the map."""
+        if not isinstance(coord, Coord):
             raise TypeError('Not a Coord')
-        if not c in self:
+        if not coord in self:
             raise IndexError('Out of map coord')
 
-    def checkElement(self, o):
-        """Check if o is an Element."""
-        if not isinstance(o, Element):
+    def checkElement(self, elem):
+        """Check if elem is an Element."""
+        if not isinstance(elem, Element):
             raise TypeError('Not a Element')
 
-    def put(self, c, o):
-        """Puts an element o on the cell c"""
-        self.checkCoord(c)
-        self.checkElement(o)
-        if self._mat[c.y][c.x] != Map.ground:
+    def put(self, coord, elem):
+        """Puts an element elem at the coordinates coord."""
+        self.checkCoord(coord)
+        self.checkElement(elem)
+        if self._mat[coord.y][coord.x] != Map.ground:
             raise ValueError('Incorrect cell')
-        if o in self._elem:
+        if elem in self._elem:
             raise KeyError('Already placed')
-        self._mat[c.y][c.x] = o
-        self._elem[o] = c
+        self._mat[coord.y][coord.x] = elem
+        self._elem[elem] = coord
 
-    def get(self, c):
-        """Returns the object present on the cell c"""
-        self.checkCoord(c)
-        return self._mat[c.y][c.x]
+    def get(self, coord):
+        """Returns the object at the coordinates coord"""
+        self.checkCoord(coord)
+        return self._mat[coord.y][coord.x]
 
-    def pos(self, o):
+    def pos(self, elem):
         """Returns the coordinates of an element in the map """
-        self.checkElement(o)
-        return self._elem[o]
+        self.checkElement(elem)
+        return self._elem[elem]
 
-    def rm(self, c):
+    def rm(self, coord):
         """Removes the element at the coordinates c"""
-        self.checkCoord(c)
-        del self._elem[self._mat[c.y][c.x]]
-        self._mat[c.y][c.x] = Map.ground
+        self.checkCoord(coord)
+        del self._elem[self._mat[coord.y][coord.x]]
+        self._mat[coord.y][coord.x] = Map.ground
 
-    def move(self, e, way):
+    def move(self, elem, way):
         """Moves the element e in the direction way."""
-        orig = self.pos(e)
+        orig = self.pos(elem)
         dest = orig + way
         if dest in self:
             if self.get(dest) == Map.ground:
                 self._mat[orig.y][orig.x] = Map.ground
-                self._mat[dest.y][dest.x] = e
-                self._elem[e] = dest
-            elif self.get(dest) != Map.empty and self.get(dest).meet(e) and self.get(dest) != self._hero:
+                self._mat[dest.y][dest.x] = elem
+                self._elem[elem] = dest
+            elif self.get(dest) != Map.empty and self.get(dest).meet(elem) and self.get(dest) != self._hero:
                 self.rm(dest)
 
     def moveAllMonsters(self):
         """Moves all monsters in the map.
             If a monster is at distance lower than 6 from the hero, the monster advances."""
-        h = self.pos(self._hero)
-        for e in self._elem:
-            c = self.pos(e)
-            if isinstance(e, Creature) and e != self._hero and c.distance(h) < 6:
-                d = c.direction(h)
-                if self.get(c + d) in [Map.ground, self._hero]:
-                    self.move(e, d)
+        hero_pos = self.pos(self._hero)
+        for elem in self._elem:
+            elem_pos = self.pos(elem)
+            if isinstance(elem, Creature) and elem != self._hero and elem_pos.distance(hero_pos) < 6:
+                elem_dir_hero = elem_pos.direction(hero_pos) # direction the monster should go
+                if self.get(elem_pos + elem_dir_hero) in [Map.ground, self._hero]:
+                    self.move(elem, elem_dir_hero)
