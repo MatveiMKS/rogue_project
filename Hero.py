@@ -1,3 +1,5 @@
+''' Contains hero class'''
+
 from Creature import Creature
 from Equipment import Equipment
 
