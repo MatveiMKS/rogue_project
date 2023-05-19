@@ -28,24 +28,26 @@ class Game(object):
                 5: [Creature("Dragon", 20, strength=3)]}
 
     #available actions w/ their key
-    _actions = { 'z': lambda h: theGame.theGame()._floor.move(h, Coord(0, -1)), \
-                'q': lambda h: theGame.theGame()._floor.move(h, Coord(-1, 0)), \
-                's': lambda h: theGame.theGame()._floor.move(h, Coord(0, 1)), \
-                'd': lambda h: theGame.theGame()._floor.move(h, Coord(1, 0)), \
-                'i': lambda h: theGame.theGame().addMessage(h.fullDescription()), \
-                'k': lambda h: h.kill(), \
-                'u': lambda h: h.use(theGame.theGame().select(h._inventory)), \
-                ' ': lambda h: None, \
-                'h': lambda hero: theGame.theGame().addMessage("Actions disponibles : " + str(list(Game._actions.keys()))), \
-                'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name), \
+    _actions = { 'z': lambda h: theGame.theGame()._floor.move(h, Coord(0, -1)),
+                'q': lambda h: theGame.theGame()._floor.move(h, Coord(-1, 0)),
+                's': lambda h: theGame.theGame()._floor.move(h, Coord(0, 1)),
+                'd': lambda h: theGame.theGame()._floor.move(h, Coord(1, 0)),
+                'i': lambda h: theGame.theGame().addMessage(h.fullDescription()),
+                'k': lambda h: h.kill(),
+                'u': lambda h: h.use(theGame.theGame().select(h._inventory)),
+                ' ': lambda h: None,
+                'h': lambda hero: theGame.theGame().addMessage("Available actions : " + str(list(Game._actions.keys()))),
+                'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name)
                 }
 
     def __init__(self, level=1, hero=None):
         self._level = level
         self._messages = []
-        if hero == None:
-            hero = Hero()
-        self._hero = hero
+        self._hero = hero if hero else Hero()
+        # if hero == None:
+        #     hero = Hero()
+        # self._hero = hero
+        # check here if problem w/ hero
         self._floor = None
 
     def buildFloor(self):
