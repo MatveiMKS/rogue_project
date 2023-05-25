@@ -28,7 +28,3 @@ Executer le fichier main.py et puis utilisez les touches z q s d pour vous depla
     1. Potions (small, medium, big)
     2. Weapoms (add strenght)
     3. Armor (add base resistance)
-- stackable gold
-- armor points
-- bow distance attack
-- shop
