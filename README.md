@@ -32,4 +32,3 @@ Executer le fichier main.py et puis utilisez les touches z q s d pour vous depla
 - armor points
 - bow distance attack
 - shop
-- test
