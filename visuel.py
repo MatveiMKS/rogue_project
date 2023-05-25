@@ -33,5 +33,3 @@ while running:
     press = pygame.key.get_pressed()
     if press[pygame.K_RIGHT]:
         hero.rect.x += 0.5
-
-# no
