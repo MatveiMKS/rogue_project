@@ -3,6 +3,7 @@
 import Coord
 import Creature as cr
 import theGame
+from utils import getch2
 
 def heal(creature, strength):
     """Heal the creature by strength points"""
@@ -24,10 +25,26 @@ def throw(direction, power, start_pos):
     pos = Coord.Coord(pos_x, pos_y)
     return pos
 
-def shoot(hero, direction, power, damage):
+def shoot(hero, power, damage, direction):
     """Shoots a projectile at the creature"""
-    for i in range(power):
+    for i in range(1, power+1):
         pos = throw(direction, i, theGame.theGame()._floor.pos(hero))
-        if isinstance(theGame.theGame()._floor.get(pos), cr.Creature)):
-            theGame.theGame()._floor.get(pos).hp -= damage
+        obj = theGame.theGame()._floor.get(pos)
+        if isinstance(obj, cr.Creature):
+            obj.hp -= damage
+            theGame.theGame().addMessage(f"The {hero.name} shoots the {obj.description()} for {str(damage)} damage")
             return True
+
+def askDirection():
+    """Ask the user for a direction"""
+    directions = {'z': Coord.Coord(0, -1),
+                  'q': Coord.Coord(-1, 0),
+                  's': Coord.Coord(0, 1),
+                  'd': Coord.Coord(1, 0)}
+
+    print("Which direction? (zqsd)")
+    direction = getch2()
+    if direction in directions:
+        return directions[direction]
+    else:
+        return Coord.Coord(0, 0)
