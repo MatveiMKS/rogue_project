@@ -8,7 +8,7 @@ from Coord import Coord
 from Hero import Hero
 from Map import Map
 from Stairs import Stairs
-from handler import heal, teleport, throw
+from handler import heal, teleport, shoot, askDirection
 from utils import getch2
 import theGame
 import visuel
@@ -20,8 +20,8 @@ class Game():
     # the key is the probability of the equipment to appear (higher key = lower probability)
     equipments = {0: [Equipment("small potion", "!", usage=lambda self, hero: heal(hero, 3))],
                   1: [Equipment("gold", "o")],
-                  2: [Equipment("bow", usage=lambda self, hero: throw(1, True)),
-                      Equipment("medium potion", "?", usage=lambda self, hero: heal(hero, 5))],
+                  2: [Equipment("medium potion", "?", usage=lambda self, hero: heal(hero, 5)),
+                      Equipment("bow", usage=lambda self, hero: shoot(hero, 4, 4, askDirection()))],
                   3: [Equipment("portoloin", "w", usage=lambda self, hero: teleport(hero, True)),
                       Equipment("big potion", "%", usage=lambda self, hero: heal(hero, 10))],
                   }
@@ -47,10 +47,6 @@ class Game():
         self._level = level
         self._messages = []
         self._hero = hero if hero else Hero()
-        # if hero == None:
-        #     hero = Hero()
-        # self._hero = hero
-        # check here if problem w/ hero
         self._floor = None
 
     def buildFloor(self):

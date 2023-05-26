@@ -30,5 +30,3 @@ while running:
 
     if press[pygame.K_DOWN]:
         hero.rect.y += 0.5
-
-

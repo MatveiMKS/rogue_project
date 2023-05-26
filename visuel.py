@@ -28,5 +28,3 @@ background = pygame.image.load("assets/bg.jpg")
 
 # Hero
 hero = Char(10, pygame.image.load("assets/hero.png"))
-
-
