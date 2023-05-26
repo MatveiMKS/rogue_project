@@ -11,6 +11,7 @@ from Stairs import Stairs
 from handler import heal, teleport, throw
 from utils import getch2
 import theGame
+import visuel
 
 class Game():
     """ Class representing game state """
@@ -56,6 +57,7 @@ class Game():
         """Creates a map for the current floor."""
         self._floor = Map(hero=self._hero)
         self._floor.put(self._floor._rooms[-1].center(), Stairs())
+        visuel.afficher(self._floor._mat, visuel.background)
         self._level += 1
 
     def addMessage(self, msg):
@@ -93,7 +95,7 @@ class Game():
         if key_press.isdigit() and int(key_press) in range(len(inventory)):
             return inventory[int(key_press)]
 
-    def play(self):
+    def play1(self):
         """Main game loop"""
         self.buildFloor()
         print("--- Welcome Hero! ---")
@@ -103,8 +105,13 @@ class Game():
             print(self._hero.description())
             print(self.readMessages())
             key_press = getch2()
-            print(key_press in Game._actions)
             if key_press in Game._actions:
                 Game._actions[key_press](self._hero)
             self._floor.moveAllMonsters()
         print("--- Game Over ---")
+
+
+    def play2(self):
+        '''Main game loop'''
+        self.buildFloor()
+        print(self._floor)

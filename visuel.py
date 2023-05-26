@@ -1,7 +1,21 @@
 import pygame
 from Char import Char
+import const
 
-pygame.init()
+def afficher(sol, fenetre):
+    mur = pygame.image.load(const.image_sol).convert()
+    num_ligne = 0
+    for ligne in sol:
+        num_case = 0
+        for sprite in ligne:
+            x = num_case * 30
+            y = num_ligne * 30
+            if sprite == '.':		   
+                fenetre.blit(mur, (x,y))
+            num_case += 1
+        num_ligne += 1
+
+
 
 # Window
 pygame.display.set_icon(pygame.image.load("assets/icone.png"))
@@ -13,24 +27,6 @@ window = pygame.display.set_mode((1080, 720))
 background = pygame.image.load("assets/bg.jpg")
 
 # Hero
-hero = Char(10)
+hero = Char(10, pygame.image.load("assets/hero.png"))
 
-running = True
-while running:
-    # Background
-    window.blit(background, (0, 0))
 
-    # Hero
-    window.blit(hero.image, hero.rect)
-
-    # Update
-    pygame.display.flip()
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: # If the user exits the window
-            running = False
-    
-    press = pygame.key.get_pressed()
-    if press[pygame.K_RIGHT]:
-        hero.rect.x += 0.5
-#caca
