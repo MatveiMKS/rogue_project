@@ -1,0 +1,1 @@
+image_sol = "assets/floor_tales.jpg"
