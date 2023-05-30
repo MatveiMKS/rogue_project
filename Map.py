@@ -181,6 +181,7 @@ class Map():
     def moveAllMonsters(self):
         """Moves all monsters in the map.
             If a monster is at distance lower than 6 from the hero, the monster advances."""
+        print(type(self._hero))
         hero_pos = self.pos(self._hero)
         for elem in self._elem:
             elem_pos = self.pos(elem)
