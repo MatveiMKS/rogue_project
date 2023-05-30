@@ -27,12 +27,11 @@ Executer le fichier main.py et puis utilisez les touches z q s d pour vous depla
 - add shooting feature (for bows + magic) (2)
 - xp and level up (1)
 - remove item from inv (1) 
-- limit inventory (1)
+- limit inventory + health (1)
 ## Fonctionnalités à implementer:
 
 - pathfinding (Matvei)
 - magie (Theophile) 
 - interface graphique (Mat et Theo) (4)
 - visibility fog (3)
-- limit health (1)
 - add boss
