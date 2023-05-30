@@ -14,8 +14,7 @@ class Creature(Element):
         self.hp = hp
         self.strength = strength
         self.equipments = 'barehands'
-        self.xp = 0
-        self.level = 1
+
 
     def description(self):
         """Description of the creature"""
