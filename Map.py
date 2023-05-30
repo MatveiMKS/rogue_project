@@ -178,6 +178,11 @@ class Map():
             elif self.get(dest) != Map.empty and self.get(dest).meet(elem) and self.get(dest) != self._hero:
                 self.rm(dest)
 
+    def is_ground(self, coord):
+        """Checks if the cell at the coordinates coord is empty."""
+        self.checkCoord(coord)
+        return self._mat[coord.y][coord.x] == Map.ground
+
     def find_path(self, elem):
         """Find a path from a monster to the hero."""
         opened = {self.pos(elem): (0, self.pos(elem).distance(self.pos(self._hero)))}
