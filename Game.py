@@ -18,7 +18,8 @@ class Game():
     # available equipments w/ their probabilities and actions / effects
     # the key is the probability of the equipment to appear (higher key = lower probability)
     equipments = {0: [Equipment("small potion", "!", usage=lambda self, hero: heal(hero, 3)),
-                      Equipment("dagger", usage=lambda self, hero: hero.equip(self))
+                      Equipment("dagger", usage=lambda self, hero: hero.equip(self)),
+                      Equipment("bow", usage=lambda self, hero: shoot(hero, 4, 4, askDirection()))
                       ],
 
                   1: [Equipment("gold", "o"),
@@ -27,7 +28,6 @@ class Game():
                       ] + [Equipment(armor, usage=lambda self, hero: hero.suit_up(self)) for armor in Hero.armory],
 
                   2: [Equipment("medium potion", "?", usage=lambda self, hero: heal(hero, 5)),
-                      Equipment("bow", usage=lambda self, hero: shoot(hero, 4, 4, askDirection())),
                       Equipment("longsword", "L", usage=lambda self, hero: hero.equip(self))
                       ],
 
