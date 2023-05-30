@@ -34,7 +34,13 @@ def shoot(hero, power, damage, direction):
             if isinstance(obj, cr.Creature):
                 obj.hp -= damage
                 theGame.theGame().addMessage(f"The {hero.name} shoots the {obj.description()} for {str(damage)} damage")
-                obj.isDead()
+                death = obj.isDead()
+                if death:
+                    hero.xp += obj.strength * 2
+                    if hero.xp >= hero.level * 10:
+                        hero.level += 1
+                        hero.xp = 0
+                        theGame.theGame().addMessage(f"The {hero.name} levels up to level {obj.level}")
                 return True
 
 def askDirection():
