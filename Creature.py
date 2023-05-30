@@ -14,6 +14,8 @@ class Creature(Element):
         self.hp = hp
         self.strength = strength
         self.equipments = 'barehands'
+        self.xp = 0
+        self.level = 0
 
     def description(self):
         """Description of the creature"""
@@ -22,15 +24,20 @@ class Creature(Element):
     def meet(self, other):
         """The creature is encountered by an other creature.
             The other one hits the creature. Return True if the creature is dead."""
-        crit = random.randint(1, 10)
+        crit = random.randint(0, 10)
         damage = other.strength
-        self.hp -= damage if crit != 10 else damage * 2
+        self.hp -= damage if crit != 10 else (damage * 2) if crit!= 0 else 0
         if crit == 10:
             theGame.theGame().addMessage(f"The {other.name} lands a critical hit on the {self.description()}")
         theGame.theGame().addMessage(f"The {other.name} hits the {self.description()} "
                                      f"for {damage if crit != 10 else damage * 2} damage")
         if self.hp > 0:
             return False
+        other.xp += self.strength * 2
+        if other.xp >= other.level * 10:
+            other.level += 1
+            other.xp = 0
+            theGame.theGame().addMessage(f"The {other.name} levels up to level {other.level}")
         return True
 
     def kill(self):
