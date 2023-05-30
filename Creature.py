@@ -13,7 +13,7 @@ class Creature(Element):
         Element.__init__(self, name, abbrv)
         self.hp = hp
         self.strength = strength
-        self.equipments = 'barehands'
+        
 
 
     def description(self):

@@ -26,7 +26,6 @@ Executer le fichier main.py et puis utilisez les touches z q s d pour vous depla
 - add crit / dodge chance (1)
 - add shooting feature (for bows + magic) (2)
 - xp and level up (1)
-- remove item from inv (1) 
 - limit inventory + health (1)
 - add ability to drop items (1)
 ## Fonctionnalités à implementer:

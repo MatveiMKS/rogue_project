@@ -15,7 +15,7 @@ class Hero(Creature):
              'iron helmet' : ['head', 2], 'iron chest' : ['chest', 4], 'iron legs' : ['legs', 4], 'iron boots' : ['boots', 2],
              'steel helmet' : ['head', 3], 'steel chest' : ['chest', 6], 'steel legs' : ['legs', 6], 'steel boots' : ['boots', 3],}
 
-    weapons = {'barehands': 0,'dagger': 3, 'axe': 4, 'sword': 5, 'longsword': 6, 'greatsword': 7,}
+    weapons = {'barehands': 2,'dagger': 3, 'axe': 4, 'sword': 5, 'longsword': 6, 'greatsword': 7,}
 
     def __init__(self, name="Hero", hp=10, abbrv="@", strength=2):
         Creature.__init__(self, name, hp, abbrv, strength)
@@ -29,6 +29,7 @@ class Hero(Creature):
         self.level = 1
         self.hp_max = 10
         self.money = 0
+        self.equipments = 'barehands'
 
     def gain_money(self, amount, elem):
         ''' adds money to hero'''
