@@ -70,7 +70,8 @@ class Game():
                 'u': lambda h: h.use(theGame.theGame().select(h._inventory)),
                 ' ': lambda h: None,
                 'h': lambda hero: theGame.theGame().addMessage("Available actions : " + str(list(Game._actions.keys()))),
-                'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name)
+                'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name),
+                'r': lambda h: h.drop(theGame.theGame().select(h._inventory))
                 }
 
     _actions_wasd = { 'w': lambda h: theGame.theGame()._floor.move(h, Coord(0, -1)),
@@ -82,7 +83,8 @@ class Game():
                     'u': lambda h: h.use(theGame.theGame().select(h._inventory)),
                     ' ': lambda h: None,
                     'h': lambda hero: theGame.theGame().addMessage("Available actions : " + str(list(Game._actions_wasd.keys()))),
-                    'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name)
+                    'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name),
+                    'r': lambda h: h.drop(theGame.theGame().select(h._inventory))
                     }
 
     def __init__(self, level=1, hero=None):

@@ -82,7 +82,15 @@ class Hero(Creature):
         if elem.use(self):
             self._inventory.remove(elem)
             return
-        
+
+    def drop(self,elem):
+        """Drops a piece of equipment"""
+        self.checkEquipment(elem)
+        if elem not in self._inventory:
+            raise ValueError('Equipment ' + elem.name + 'not in inventory')
+        self._inventory.remove(elem)
+        return
+
     def meet(self, other):
         """The creature is encountered by an other creature.
             The other one hits the creature. Return True if the creature is dead."""
