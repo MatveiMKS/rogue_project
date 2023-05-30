@@ -12,6 +12,7 @@ from handler import heal, teleport, throw
 from utils import getch2
 import theGame
 import visuel
+import pygame 
 
 class Game():
     """ Class representing game state """
@@ -57,7 +58,7 @@ class Game():
         """Creates a map for the current floor."""
         self._floor = Map(hero=self._hero)
         self._floor.put(self._floor._rooms[-1].center(), Stairs())
-        visuel.afficher(self._floor._mat, visuel.background)
+        print(self._floor._mat)
         self._level += 1
 
     def addMessage(self, msg):
@@ -91,27 +92,40 @@ class Game():
     def select(self, inventory):
         ''' Select an item from an inventory'''
         print("Choose item> " + str([str(inventory.index(item)) + ": " + item.name for item in inventory]))
-        key_press = getch2()
+        key_press = visuel.interact()
         if key_press.isdigit() and int(key_press) in range(len(inventory)):
             return inventory[int(key_press)]
 
     def play1(self):
+        running = True
+        window, background = visuel.initialisation()
         """Main game loop"""
         self.buildFloor()
+        visuel.afficher(self._floor._mat, background, self._hero)
+        running = visuel.refresh(window, background)
         print("--- Welcome Hero! ---")
-        while self._hero.hp > 0:
+        level = 2
+        print(self._level)
+        while self._hero.hp > 0 and running:
+            pygame.time.Clock().tick(60)
+            pygame.display.flip()
+            if level != self._level:
+                window, background = visuel.initialisation()
+                visuel.afficher(self._floor._mat, background, self._hero)
+                running = visuel.refresh(window, background)
+                level += 1
             print()
             print(self._floor)
             print(self._hero.description())
             print(self.readMessages())
-            key_press = getch2()
+            key_press = visuel.interact()
             if key_press in Game._actions:
                 Game._actions[key_press](self._hero)
+                visuel.afficher(self._floor._mat, background, self._hero)
+                running = visuel.refresh(window, background)
+            
+                
             self._floor.moveAllMonsters()
         print("--- Game Over ---")
 
 
-    def play2(self):
-        '''Main game loop'''
-        self.buildFloor()
-        print(self._floor)
