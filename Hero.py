@@ -1,7 +1,9 @@
 ''' Contains hero class'''
 
+from Coord import Coord
 from Creature import Creature
 from Equipment import Equipment
+#from Map import Map
 import theGame
 import random
 
@@ -119,6 +121,12 @@ class Hero(Creature):
         if elem not in self._inventory:
             raise ValueError('Equipment ' + elem.name + 'not in inventory')
         self._inventory.remove(elem)
+
+        hero_pos = theGame.theGame()._floor.pos(self)
+        for direction in [Coord(0,1), Coord(0,-1), Coord(1,0), Coord(-1,0)]:
+            if theGame.theGame()._floor.is_ground(hero_pos + direction):
+                theGame.theGame()._floor.put(hero_pos + direction, elem)
+                return
         return
 
     def meet(self, other):
