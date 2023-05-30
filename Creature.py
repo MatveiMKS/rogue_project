@@ -38,10 +38,7 @@ class Creature(Element):
         if self.hp > 0:
             return False
         other.xp += self.strength * 2
-        if other.xp >= (other.level * 10):
-            other.level += 1
-            other.xp = 0
-            theGame.theGame().addMessage(f"The {other.name} levels up to level {other.level}")
+        other.level_up()
         return True
 
     def kill(self):
