@@ -23,16 +23,16 @@ Executer le fichier main.py et puis utilisez les touches z q s d pour vous depla
     2. Weapoms (add strenght) (1)
     3. Armor (add resistance) (1)
     4. bow (1)
-- add crit chance (1)
+- add crit / dodge chance (1)
 - add shooting feature (for bows + magic) (2)
+- xp and level up (1)
+- remove item from inv (1) 
+- limit inventory (1)
 ## Fonctionnalités à implementer:
 
 - pathfinding (Matvei)
 - magie (Theophile) 
 - interface graphique (Mat et Theo) (4)
 - visibility fog (3)
-- lock health and inventory @ 10# (1)
-- xp and level up (Hussein) (1)
-- add dodge chance
+- limit health (1)
 - add boss
-- remove item from inv (1) 
