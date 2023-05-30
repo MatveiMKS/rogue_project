@@ -29,6 +29,7 @@ def shoot(hero, power, damage, direction):
     """Shoots a projectile at the creature"""
     for i in range(1, power+1):
         pos = throw(direction, i, theGame.theGame()._floor.pos(hero))
+        print(pos)
         if pos in theGame.theGame()._floor:
             obj = theGame.theGame()._floor.get(pos)
             if isinstance(obj, cr.Creature):
@@ -43,16 +44,16 @@ def shoot(hero, power, damage, direction):
                         theGame.theGame().addMessage(f"The {hero.name} levels up to level {obj.level}")
                 return True
 
-def askDirection():
+def askDirection(layout):
     """Ask the user for a direction"""
-    directions = {'z': Coord.Coord(0, -1),
-                  'q': Coord.Coord(-1, 0),
+    directions = {'z' if layout == 'f' else 'w': Coord.Coord(0, -1),
+                  'q' if layout == 'f' else 'a': Coord.Coord(-1, 0),
                   's': Coord.Coord(0, 1),
                   'd': Coord.Coord(1, 0)}
 
-    print("Which direction? (direction keys)")
-    direction = getch2()
-    if direction in directions:
-        return directions[direction]
-    else:
-        return Coord.Coord(0, 0)
+    direction = None
+    while direction not in directions:
+        print("Which direction? (direction keys)")
+        direction = getch2()
+        print(direction)
+    return directions[direction]
