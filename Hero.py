@@ -26,6 +26,12 @@ class Hero(Creature):
         self.xp = 0
         self.level = 1
         self.hp_max = 10
+        self.money = 0
+
+    def gain_money(self, amount, elem):
+        ''' adds money to hero'''
+        self.money += amount
+        self._inventory.remove(elem)
 
     def level_up(self):
         ''' checks if hero can level up and does so'''
