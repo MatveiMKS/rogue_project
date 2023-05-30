@@ -16,6 +16,6 @@ class Element():
         """Description of the element"""
         return "<" + self.name + ">"
 
-    def meet(self, hero):
+    def meet(self, other):
         """Makes the hero meet an element. Not implemented. """
         raise NotImplementedError('Abstract Element')

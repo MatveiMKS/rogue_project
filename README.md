@@ -17,14 +17,19 @@ Pour essayer le projet:
 Executer le fichier main.py et puis utilisez les touches z q s d pour vous deplacer
 
 ## Fonctionnalités implétementées en plus:
-
-## Fonctionnalités à implementer:
-
-- option de choix de disposition clavier (Matvei)
-- magie (Theophile)
-- interface graphique (Mat et Theo)
-- lock health and inventory @ 10#
+- option de choix de disposition clavier
 - add items:
     1. Potions (small, medium, big)
     2. Weapoms (add strenght)
-    3. Armor (add base resistance)
+    3. Armor (add resistance)
+- add crit chance
+- add shooting feature (for bows + magic)
+## Fonctionnalités à implementer:
+
+- pathfinding (Matvei)
+- magie (Theophile)
+- interface graphique (Mat et Theo)
+- lock health and inventory @ 10#
+- xp and level up (Hussein)
+- add dodge chance
+- add boss

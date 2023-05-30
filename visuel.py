@@ -29,9 +29,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # If the user exits the window
             running = False
-    
+
     press = pygame.key.get_pressed()
     if press[pygame.K_RIGHT]:
         hero.rect.x += 0.5
-
-# no

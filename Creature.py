@@ -2,25 +2,33 @@
 
 from Element import Element
 import theGame
+import random
 
 class Creature(Element):
     """A creature that occupies the dungeon.
         Has hit points and strength."""
 
+
     def __init__(self, name, hp, abbrv="", strength=1):
         Element.__init__(self, name, abbrv)
         self.hp = hp
         self.strength = strength
+        self.equipments = 'barehands'
 
     def description(self):
         """Description of the creature"""
-        return Element.description(self) + "(" + str(self.hp) + ")"
+        return f"{Element.description(self)} ({str(self.hp)})"
 
     def meet(self, other):
         """The creature is encountered by an other creature.
             The other one hits the creature. Return True if the creature is dead."""
-        self.hp -= other.strength
-        theGame.theGame().addMessage("The " + other.name + " hits the " + self.description())
+        crit = random.randint(1, 10)
+        damage = other.strength
+        self.hp -= damage if crit != 10 else damage * 2
+        if crit == 10:
+            theGame.theGame().addMessage(f"The {other.name} lands a critical hit on the {self.description()}")
+        theGame.theGame().addMessage(f"The {other.name} hits the {self.description()} "
+                                     f"for {damage if crit != 10 else damage * 2} damage")
         if self.hp > 0:
             return False
         return True
@@ -29,3 +37,10 @@ class Creature(Element):
         """ Insta kill a creature """
         self.hp = 0
         return True
+
+    def isDead(self):
+        """Return True if the creature is dead"""
+        if self.hp <= 0:
+            theGame.theGame().addMessage("The " + self.name + " is dead")
+            theGame.theGame()._floor.rm(theGame.theGame()._floor.pos(self))
+            return True
