@@ -42,3 +42,12 @@ def sign(x):
     if x > 0:
         return 1
     return -1
+
+def min_cost(dico):
+    """Returns the element with the lowest cost"""
+    cle_mini = list(dico.keys())[0]
+    mini = dico[cle_mini]
+    for el in dico:
+        if dico[el][0] + dico[el][1] < mini[0] + mini[1]:
+            cle_mini = el
+    return cle_mini
