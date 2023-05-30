@@ -29,8 +29,13 @@ class Creature(Element):
         self.hp -= damage if crit != 10 else (damage * 2) if crit!= 0 else 0
         if crit == 10:
             theGame.theGame().addMessage(f"The {other.name} lands a critical hit on the {self.description()}")
-        theGame.theGame().addMessage(f"The {other.name} hits the {self.description()} "
-                                     f"for {damage if crit != 10 else damage * 2} damage")
+            theGame.theGame().addMessage(f"The {other.name} hits the {self.description()} "
+                                     f"for {damage * 2} damage")
+        elif crit == 0:
+            theGame.theGame().addMessage(f"The {other.name} misses the {self.description()}")
+        else:
+            theGame.theGame().addMessage(f"The {other.name} hits the {self.description()} "
+                                         f"for {damage} damage")
         if self.hp > 0:
             return False
         other.xp += self.strength * 2
