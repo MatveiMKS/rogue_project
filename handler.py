@@ -7,7 +7,13 @@ from utils import getch2
 
 def heal(creature, strength):
     """Heal the creature by strength points"""
-    creature.hp += strength
+    new_hp = creature.hp + strength
+    if new_hp > creature.hp_max:
+        creature.hp = creature.hp_max
+        theGame.theGame().addMessage(f"The {creature.name} is fully healed")
+    else:
+        creature.hp += strength
+        theGame.theGame().addMessage(f"The {creature.name} is healed for {strength} points")
     return True
 
 def teleport(creature, unique):
@@ -38,10 +44,7 @@ def shoot(hero, power, damage, direction):
                 death = obj.isDead()
                 if death:
                     hero.xp += obj.strength * 2
-                    if hero.xp >= hero.level * 10:
-                        hero.level += 1
-                        hero.xp = 0
-                        theGame.theGame().addMessage(f"The {hero.name} levels up to level {obj.level}")
+                    hero.level_up()
                 return True
 
 def askDirection(layout):
