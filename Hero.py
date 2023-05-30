@@ -19,9 +19,24 @@ class Hero(Creature):
         Creature.__init__(self, name, hp, abbrv, strength)
         self._inventory = []
         self.armor = 0
-        self.armors = {'head' : ['head', 0], 'chest' : ['chest', 0], 'legs' : ['chest', 0], 'boots' : ['boots', 0],}
+        self.armors = {'head' : ['head', 0],
+                       'chest' : ['chest', 0],
+                       'legs' : ['chest', 0],
+                       'boots' : ['boots', 0],}
         self.xp = 0
         self.level = 1
+        self.hp_max = 10
+
+    def level_up(self):
+        ''' checks if hero can level up and does so'''
+        if self.xp >= self.level * 10:
+            self.level += 1
+            self.xp = 0
+            self.hp_max += 2
+            self.hp += 2
+            theGame.theGame().addMessage(f"The {self.name} levels up to level {self.level}")
+            return True
+        return False
 
     def description(self):
         """Description of the hero"""
