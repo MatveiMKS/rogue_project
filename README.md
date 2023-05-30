@@ -33,3 +33,4 @@ Executer le fichier main.py et puis utilisez les touches z q s d pour vous depla
 - xp and level up (Hussein)
 - add dodge chance
 - add boss
+- remove item from inv
