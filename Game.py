@@ -19,7 +19,7 @@ class Game():
     # the key is the probability of the equipment to appear (higher key = lower probability)
     equipments = {0: [Equipment("small potion", "!", usage=lambda self, hero: heal(hero, 3)),
                       Equipment("dagger", usage=lambda self, hero: hero.equip(self)),
-                      Equipment("bow", usage=lambda self, hero: shoot(hero, 4, 4, askDirection()))
+                      Equipment("bow", usage=lambda self, hero: shoot(hero, 4, 4, askDirection(theGame.theGame().layout)))
                       ],
 
                   1: [Equipment("gold", "o"),
@@ -90,6 +90,18 @@ class Game():
         self._messages = []
         self._hero = hero if hero else Hero()
         self._floor = None
+        self.layout = 'f'
+
+    def change_layout(self):
+        ''' Changes the layout'''
+        layout = '0'
+        while layout not in ['1' , '2']:
+            print("Choose layout 1: zqsd or 2: wasd ")
+            layout = getch2()
+        if layout == '1':
+            self.layout = 'f'
+        else:
+            self.layout = 'w'
 
     def buildFloor(self):
         """Creates a map for the current floor."""
@@ -138,11 +150,9 @@ class Game():
         """Main game loop"""
         self.buildFloor()
         print("--- Welcome Hero! ---")
-        layout = None
-        while layout not in ['1' , '2']:
-            print("Choose layout 1: zqsd or 2: wasd ")
-            layout = getch2()
-        if layout == '1':
+        self.change_layout()
+        layout = self.layout
+        if layout == 'f':
             actions = Game._actions
         else:
             actions = Game._actions_wasd
@@ -152,7 +162,6 @@ class Game():
             print(self._hero.description())
             print(self.readMessages())
             key_press = getch2()
-            print(key_press in actions)
             if key_press in actions:
                 actions[key_press](self._hero)
             self._floor.moveAllMonsters()
