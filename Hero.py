@@ -20,6 +20,8 @@ class Hero(Creature):
         self._inventory = []
         self.armor = 0
         self.armors = {'head' : ['head', 0], 'chest' : ['chest', 0], 'legs' : ['chest', 0], 'boots' : ['boots', 0],}
+        self.xp = 0
+        self.level = 1
 
     def description(self):
         """Description of the hero"""
