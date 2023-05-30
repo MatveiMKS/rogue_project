@@ -24,7 +24,7 @@ class Creature(Element):
         if self.hp > 0:
             return False
         return True
-    
+
     def kill(self):
         """ Insta kill a creature """
         self.hp = 0
