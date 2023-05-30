@@ -19,7 +19,7 @@ class Game():
     # the key is the probability of the equipment to appear (higher key = lower probability)
     equipments = {0: [Equipment("small potion", "!", usage=lambda self, hero: heal(hero, 3)),
                       Equipment("dagger", usage=lambda self, hero: hero.equip(self)),
-                      Equipment("bow", usage=lambda self, hero: shoot(hero, 4, 4, askDirection(theGame.theGame().layout))),
+                      Equipment("throwing knife", usage=lambda self, hero: shoot(hero, 4, 4, askDirection(theGame.theGame().layout))),
                       Equipment("gold", "o", usage=lambda self, hero: hero.gain_money(5, self))
                       ],
 
