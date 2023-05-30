@@ -51,6 +51,7 @@ class Creature(Element):
 
     def isDead(self):
         """Return True if the creature is dead"""
+        print('Here')
         if self.hp <= 0:
             theGame.theGame().addMessage("The " + self.name + " is dead")
             theGame.theGame()._floor.rm(theGame.theGame()._floor.pos(self))
