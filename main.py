@@ -1,6 +1,7 @@
 from utils import _find_getch
 import theGame
-from visuel import * 
+from visuel import *
 
-theGame.theGame().play1()
+getch = _find_getch()
+theGame.theGame().play()
 

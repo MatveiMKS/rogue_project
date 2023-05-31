@@ -63,13 +63,7 @@ def refresh(window, background):
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # If the user exits the window
             running = False
-    
-   
-
-
     return running
-
-
 def interact():
     
     pygame.event.clear()
@@ -84,14 +78,4 @@ def interact():
             
 #def inventory(hero):
     #for object 
-
-
-    
-
-    
-
-    
-
-
-
 
