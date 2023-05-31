@@ -26,6 +26,7 @@ class Map():
         self._elem = {}
         self._rooms = []
         self._roomsToReach = []
+        self._size = size 
 
         for _ in range(size):
             self._mat.append([Map.empty] * size)
@@ -37,6 +38,8 @@ class Map():
         self.put(self._rooms[0].center(), hero)
         for r in self._rooms:
             r.decorate(self)
+
+
 
     def addRoom(self, room):
         """Adds a room in the map."""
@@ -188,3 +191,5 @@ class Map():
                 elem_dir_hero = elem_pos.direction(hero_pos) # direction the monster should go
                 if self.get(elem_pos + elem_dir_hero) in [Map.ground, self._hero]:
                     self.move(elem, elem_dir_hero)
+
+

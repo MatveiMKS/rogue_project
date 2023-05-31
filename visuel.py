@@ -1,31 +1,41 @@
 import pygame
 from Char import Char
 from Char import Perso 
-from Creature import Creature
+from Element import Element 
 from Stairs import Stairs
+from Coord import Coord 
+from Map import Map
 import const
 import sys
 
 def afficher(sol, fenetre, player):
+    elem_type = {"Goblin" : const.image_monsters,
+                 "Blob" : const.image_monsters,
+                 "Bat" : const.image_monsters,
+                 "Ork" : const.image_monsters,
+                 "Dragon" : const.image_monsters,
+                 "small potion": const.image_potion,
+                 "medium potion": const.image_potion,
+                 "big potion": const.image_potion,
+                 "gold": const.image_gold,
+                 "Stairs": const.image_stairs,
+                 "bow": const.image_bow}
+    
     floor = Char(pygame.image.load(const.image_sol).convert())
     hero = Char(pygame.image.load(const.image_hero).convert())
-    monster = Char(pygame.image.load(const.image_monsters).convert())
-    stairs = Char(pygame.image.load(const.image_stairs).convert())
     num_ligne = 0
-    for ligne in sol:
+    for ligne in sol._mat:
         num_case = 0
         for sprite in ligne:
-            x = num_case * 30
+            x = num_case * 30 
             y = num_ligne * 30
-            if sprite == '.':		   
+            if sprite == '.' and (sol.pos(player).distance(Coord(x/30,y/30)) < 5):		   
                 fenetre.blit(floor.image, (x,y))
             elif sprite == player :
                 fenetre.blit(hero.image, (x,y))
-            elif isinstance(sprite, Creature):
-                fenetre.blit(monster.image, (x,y))
-            elif isinstance(sprite, Stairs):
-                fenetre.blit(stairs.image, (x,y))
-
+            elif isinstance(sprite, Element) and (sol.pos(player).distance(Coord(x/30,y/30)) < 5):
+                fenetre.blit(Char(pygame.image.load(elem_type[sprite.name]).convert()).image, (x,y))
+                
             num_case += 1
         num_ligne += 1
 
@@ -72,7 +82,10 @@ def interact():
         elif event.type == pygame.KEYDOWN:
             return event.unicode
             
-            
+#def inventory(hero):
+    #for object 
+
+
     
 
     
