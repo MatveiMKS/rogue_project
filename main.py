@@ -4,4 +4,3 @@ from visuel import *
 
 getch = _find_getch()
 theGame.theGame().play()
-

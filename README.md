@@ -28,7 +28,6 @@ Executer le fichier main.py et puis utilisez les touches z q s d pour vous depla
 - limit inventory + health (1)
 - add ability to drop items (1)
 ## Fonctionnalités à implementer:
-
 - pathfinding (Matvei)
 - magie (Theophile) 
 - interface graphique (Mat et Theo) (4)

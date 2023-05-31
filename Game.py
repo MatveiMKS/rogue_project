@@ -14,6 +14,7 @@ import theGame
 import visuel
 import pygame 
 
+
 class Game():
     """ Class representing game state """
 
@@ -112,6 +113,7 @@ class Game():
         """Creates a map for the current floor."""
         self._floor = Map(hero=self._hero)
         self._floor.put(self._floor._rooms[-1].center(), Stairs())
+        visuel.afficher(self._floor._mat, visuel.background)
         self._level += 1
 
     def addMessage(self, msg):
@@ -184,5 +186,7 @@ class Game():
             key_press = visuel.interact()
             if key_press in actions:
                 actions[key_press](self._hero)
+
             self._floor.moveAllMonsters()
         print("--- Game Over ---")
+        

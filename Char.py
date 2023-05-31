@@ -25,6 +25,3 @@ class Perso(Char):
             self.x += 30 
         if direction == "left":
             self.x -= 30 
-
-
-

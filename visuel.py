@@ -94,4 +94,3 @@ def interact():
             
 #def inventory(hero):
     #for object 
-
