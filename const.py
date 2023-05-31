@@ -1,0 +1,7 @@
+image_sol = "assets/floor_tales.jpg"
+image_hero = "assets/dk_bas.png"
+image_monsters = "assets/monster.png"
+image_stairs = "assets/stairs.jpg"
+image_potion = "assets/potion.png"
+image_gold = "assets/gold.png"
+image_bow = "assets/bow.png"

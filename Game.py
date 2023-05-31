@@ -150,8 +150,12 @@ class Game():
             return inventory[int(key_press)]
 
     def play(self):
+        running = True
+        window, background = visuel.initialisation()
         """Main game loop"""
         self.buildFloor()
+        visuel.afficher(self._floor, background, self._hero)
+        running = visuel.refresh(window, background)
         print("--- Welcome Hero! ---")
         self.change_layout()
         layout = self.layout
@@ -159,12 +163,23 @@ class Game():
             actions = Game._actions
         else:
             actions = Game._actions_wasd
-        while self._hero.hp > 0:
+        level = 2
+        print(self._level)
+        while self._hero.hp > 0 and running:
+            pygame.time.Clock().tick(60)
+            pygame.display.flip()
+            visuel.afficher(self._floor, background, self._hero)
+            running = visuel.refresh(window, background)  
+            if level != self._level:
+                window, background = visuel.initialisation()
+                visuel.afficher(self._floor, background, self._hero)
+                running = visuel.refresh(window, background)
+                level += 1
             print()
             print(self._floor)
             print(self._hero.description())
             print(self.readMessages())
-            key_press = getch2()
+            key_press = visuel.interact()
             if key_press in actions:
                 actions[key_press](self._hero)
             self._floor.moveAllMonsters()
