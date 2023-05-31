@@ -11,6 +11,8 @@ from Stairs import Stairs
 from handler import heal, teleport, shoot, askDirection
 from utils import getch2
 import theGame
+import visuel
+import pygame 
 
 class Game():
     """ Class representing game state """
@@ -145,7 +147,7 @@ class Game():
     def select(self, inventory):
         ''' Select an item from an inventory'''
         print("Choose item> " + str([str(inventory.index(item)) + ": " + item.name for item in inventory]))
-        key_press = getch2()
+        key_press = visuel.interact()
         if key_press.isdigit() and int(key_press) in range(len(inventory)):
             return inventory[int(key_press)]
 
