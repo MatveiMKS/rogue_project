@@ -14,12 +14,28 @@ def afficher(sol, fenetre, player):
                  "Bat" : const.image_monsters,
                  "Ork" : const.image_monsters,
                  "Dragon" : const.image_monsters,
+                 "Weak Goblin" : const.image_monsters,
+                 "Weak Blob" : const.image_monsters,
+                 "Weak Bat" : const.image_monsters,
+                 "Weak Ork" : const.image_monsters,
+                 "Weak Dragon" : const.image_monsters,
+                 "Strong Goblin" : const.image_monsters,
+                 "Strong Blob" : const.image_monsters,
+                 "Strong Bat" : const.image_monsters,
+                 "Strong Ork" : const.image_monsters,
+                 "Strong Dragon" : const.image_monsters,
                  "small potion": const.image_potion,
                  "medium potion": const.image_potion,
                  "big potion": const.image_potion,
+                 "portoloin": const.image_potion,
                  "gold": const.image_gold,
                  "Stairs": const.image_stairs,
-                 "bow": const.image_bow}
+                 "throwing knife": const.image_throwing,
+                 "dagger": const.image_epee,
+                 "sword": const.image_epee,
+                 "longsword": const.image_epee,
+                 "axe": const.image_epee
+                 }
     
     floor = Char(pygame.image.load(const.image_sol).convert())
     hero = Char(pygame.image.load(const.image_hero).convert())
