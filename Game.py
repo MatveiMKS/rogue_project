@@ -12,23 +12,57 @@ from handler import heal, teleport, shoot, askDirection
 from utils import getch2
 import theGame
 import visuel
+import pygame 
+
 
 class Game():
     """ Class representing game state """
 
     # available equipments w/ their probabilities and actions / effects
     # the key is the probability of the equipment to appear (higher key = lower probability)
-    equipments = {0: [Equipment("small potion", "!", usage=lambda self, hero: heal(hero, 3))],
-                  1: [Equipment("gold", "o")],
+    equipments = {0: [Equipment("small potion", "!", usage=lambda self, hero: heal(hero, 3)),
+                      Equipment("dagger", usage=lambda self, hero: hero.equip(self)),
+                      Equipment("throwing knife", usage=lambda self, hero: shoot(hero, 4, 4, askDirection(theGame.theGame().layout))),
+                      Equipment("gold", "o", usage=lambda self, hero: hero.gain_money(5, self))
+                      ],
+
+                  1: [
+                      Equipment("sword", usage=lambda self, hero: hero.equip(self)),
+                      Equipment("axe", usage=lambda self, hero: hero.equip(self))
+                      ] + [Equipment(armor, usage=lambda self, hero: hero.suit_up(self)) for armor in Hero.armory],
+
                   2: [Equipment("medium potion", "?", usage=lambda self, hero: heal(hero, 5)),
-                      Equipment("bow", usage=lambda self, hero: shoot(hero, 4, 4, askDirection()))],
+                      Equipment("longsword", "L", usage=lambda self, hero: hero.equip(self))
+                      ],
+
                   3: [Equipment("portoloin", "w", usage=lambda self, hero: teleport(hero, True)),
-                      Equipment("big potion", "%", usage=lambda self, hero: heal(hero, 10))],
+                      Equipment("big potion", "%", usage=lambda self, hero: heal(hero, 10))
+                      ],
                   }
 
-    monsters = {0: [Creature("Goblin", 4), Creature("Bat", 2, "W")],
-                1: [Creature("Ork", 6, strength=2), Creature("Blob", 10)],
-                5: [Creature("Dragon", 20, strength=3)]}
+    monsters = {0: [Creature("Weak Goblin", 4, 'G'),
+                    Creature("Weak Bat", 2, "W")],
+
+                1: [Creature("Weak Ork", 6, 'O', strength=2),
+                    Creature("Weak Blob", 10, 'B')],
+
+                5: [Creature("Weak Dragon", 20, 'D', strength=3)]}
+
+    mid_monsters = {0: [Creature("Goblin", 6, 'G', strength=2),
+                        Creature("Bat", 3, "W")],
+
+                    1: [Creature("Ork", 9, 'O', strength=3),
+                        Creature("Blob", 15, 'B', strength=2)],
+
+                    5: [Creature("Dragon", 30, 'D', strength=5)]}
+
+    strong_monsters = {0: [Creature("Strong Goblin", 9, 'G', strength=3),
+                           Creature("Strong Bat", 5, "W", strength=2)],
+
+                        1: [Creature("Strong Ork", 13, 'O', strength=4),
+                        Creature("Strong Blob", 20, 'B', strength=3)],
+
+                        5: [Creature("Strong Dragon", 35, 'D', strength=8)]}
 
     #available actions w/ their key
     _actions = { 'z': lambda h: theGame.theGame()._floor.move(h, Coord(0, -1)),
@@ -40,14 +74,40 @@ class Game():
                 'u': lambda h: h.use(theGame.theGame().select(h._inventory)),
                 ' ': lambda h: None,
                 'h': lambda hero: theGame.theGame().addMessage("Available actions : " + str(list(Game._actions.keys()))),
-                'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name)
+                'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name),
+                'r': lambda h: h.drop(theGame.theGame().select(h._inventory))
                 }
+
+    _actions_wasd = { 'w': lambda h: theGame.theGame()._floor.move(h, Coord(0, -1)),
+                    'a': lambda h: theGame.theGame()._floor.move(h, Coord(-1, 0)),
+                    's': lambda h: theGame.theGame()._floor.move(h, Coord(0, 1)),
+                    'd': lambda h: theGame.theGame()._floor.move(h, Coord(1, 0)),
+                    'i': lambda h: theGame.theGame().addMessage(h.fullDescription()),
+                    'k': lambda h: h.kill(),
+                    'u': lambda h: h.use(theGame.theGame().select(h._inventory)),
+                    ' ': lambda h: None,
+                    'h': lambda hero: theGame.theGame().addMessage("Available actions : " + str(list(Game._actions_wasd.keys()))),
+                    'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name),
+                    'r': lambda h: h.drop(theGame.theGame().select(h._inventory))
+                    }
 
     def __init__(self, level=1, hero=None):
         self._level = level
         self._messages = []
         self._hero = hero if hero else Hero()
         self._floor = None
+        self.layout = 'f'
+
+    def change_layout(self):
+        ''' Changes the layout'''
+        layout = '0'
+        while layout not in ['1' , '2']:
+            print("Choose layout 1: zqsd or 2: wasd ")
+            layout = getch2()
+        if layout == '1':
+            self.layout = 'f'
+        else:
+            self.layout = 'w'
 
     def buildFloor(self):
         """Creates a map for the current floor."""
@@ -64,7 +124,7 @@ class Game():
         """Returns the message list and clears it."""
         s = ''
         for m in self._messages:
-            s += m + '. '
+            s += m + '. \n'
         self._messages.clear()
         return s
 
@@ -82,32 +142,51 @@ class Game():
 
     def randMonster(self):
         """Returns a random monster."""
-        return self.randElement(Game.monsters)
+        return self.randElement(Game.monsters if self._level < 3
+                                else Game.mid_monsters if self._level < 6
+                                else Game.strong_monsters)
 
     def select(self, inventory):
         ''' Select an item from an inventory'''
         print("Choose item> " + str([str(inventory.index(item)) + ": " + item.name for item in inventory]))
-        key_press = getch2()
+        key_press = visuel.interact()
         if key_press.isdigit() and int(key_press) in range(len(inventory)):
             return inventory[int(key_press)]
 
-    def play1(self):
+    def play(self):
+        running = True
+        window, background = visuel.initialisation()
         """Main game loop"""
         self.buildFloor()
+        visuel.afficher(self._floor, background, self._hero)
+        running = visuel.refresh(window, background)
         print("--- Welcome Hero! ---")
-        while self._hero.hp > 0:
+        self.change_layout()
+        layout = self.layout
+        if layout == 'f':
+            actions = Game._actions
+        else:
+            actions = Game._actions_wasd
+        level = 2
+        print(self._level)
+        while self._hero.hp > 0 and running:
+            pygame.time.Clock().tick(60)
+            pygame.display.flip()
+            visuel.afficher(self._floor, background, self._hero)
+            running = visuel.refresh(window, background)  
+            if level != self._level:
+                window, background = visuel.initialisation()
+                visuel.afficher(self._floor, background, self._hero)
+                running = visuel.refresh(window, background)
+                level += 1
             print()
             print(self._floor)
             print(self._hero.description())
             print(self.readMessages())
-            key_press = getch2()
-            if key_press in Game._actions:
-                Game._actions[key_press](self._hero)
+            key_press = visuel.interact()
+            if key_press in actions:
+                actions[key_press](self._hero)
+
             self._floor.moveAllMonsters()
         print("--- Game Over ---")
-
-
-    def play2(self):
-        '''Main game loop'''
-        self.buildFloor()
-        print(self._floor)
+        

@@ -1,30 +1,96 @@
 import pygame
 from Char import Char
+from Char import Perso 
+from Element import Element 
+from Stairs import Stairs
+from Coord import Coord 
+from Map import Map
 import const
+import sys
 
-def afficher(sol, fenetre):
-    mur = pygame.image.load(const.image_sol).convert()
+def afficher(sol, fenetre, player):
+    elem_type = {"Goblin" : const.image_monsters,
+                 "Blob" : const.image_monsters,
+                 "Bat" : const.image_monsters,
+                 "Ork" : const.image_monsters,
+                 "Dragon" : const.image_monsters,
+                 "Weak Goblin" : const.image_monsters,
+                 "Weak Blob" : const.image_monsters,
+                 "Weak Bat" : const.image_monsters,
+                 "Weak Ork" : const.image_monsters,
+                 "Weak Dragon" : const.image_monsters,
+                 "Strong Goblin" : const.image_monsters,
+                 "Strong Blob" : const.image_monsters,
+                 "Strong Bat" : const.image_monsters,
+                 "Strong Ork" : const.image_monsters,
+                 "Strong Dragon" : const.image_monsters,
+                 "small potion": const.image_potion,
+                 "medium potion": const.image_potion,
+                 "big potion": const.image_potion,
+                 "portoloin": const.image_potion,
+                 "gold": const.image_gold,
+                 "Stairs": const.image_stairs,
+                 "throwing knife": const.image_throwing,
+                 "dagger": const.image_epee,
+                 "sword": const.image_epee,
+                 "longsword": const.image_epee,
+                 "axe": const.image_epee
+                 }
+    
+    floor = Char(pygame.image.load(const.image_sol).convert())
+    hero = Char(pygame.image.load(const.image_hero).convert())
     num_ligne = 0
-    for ligne in sol:
+    for ligne in sol._mat:
         num_case = 0
         for sprite in ligne:
-            x = num_case * 30
+            x = num_case * 30 
             y = num_ligne * 30
-            if sprite == '.':		   
-                fenetre.blit(mur, (x,y))
+            if sprite == '.' and (sol.pos(player).distance(Coord(x/30,y/30)) < 5):		   
+                fenetre.blit(floor.image, (x,y))
+            elif sprite == player :
+                fenetre.blit(hero.image, (x,y))
+            elif isinstance(sprite, Element) and (sol.pos(player).distance(Coord(x/30,y/30)) < 5):
+                fenetre.blit(Char(pygame.image.load(elem_type[sprite.name]).convert()).image, (x,y))
+                
             num_case += 1
         num_ligne += 1
 
+def initialisation():
+    pygame.init()
+    # Background
+    background = pygame.image.load("assets/bg.jpg")
 
+    # Window
+    pygame.display.set_icon(pygame.image.load("assets/icone.png"))
+    pygame.display.set_caption("Window")
 
-# Window
-pygame.display.set_icon(pygame.image.load("assets/icone.png"))
-pygame.display.set_caption("Window")
+    window = pygame.display.set_mode((1080, 720))
 
-window = pygame.display.set_mode((1080, 720))
+    return window, background
 
-# Background
-background = pygame.image.load("assets/bg.jpg")
+def refresh(window, background):
+    running = True
+        # Background
+    window.blit(background, (0, 0))
 
-# Hero
-hero = Char(10, pygame.image.load("assets/hero.png"))
+    # Update
+    pygame.display.flip()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: # If the user exits the window
+            running = False
+    return running
+def interact():
+    
+    pygame.event.clear()
+    while True:
+        event = pygame.event.wait()
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        
+
+        elif event.type == pygame.KEYDOWN:
+            return event.unicode
+            
+#def inventory(hero):
+    #for object 

@@ -12,6 +12,9 @@ class Equipment(Element):
 
     def meet(self, hero):
         """Called when the hero meets an element."""
+        if hero.is_full():
+            theGame.theGame().addMessage("Your inventory is full.")
+            return False
         hero.take(self)
         theGame.theGame().addMessage("You pick up a " + self.name)
         return True

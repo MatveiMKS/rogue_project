@@ -5,7 +5,7 @@ from Hero import Hero
 from Room import Room
 from Element import Element
 from Creature import Creature
-from utils import sign
+from utils import sign, min_cost
 
 import random
 
@@ -21,7 +21,7 @@ class Map():
            'q': Coord(-1, 0)}  
     empty = ' '  # A non walkable cell
 
-    def __init__(self, size=20, hero=None):
+    def __init__(self, size=15, hero=None):
         self._mat = []
         self._elem = {}
         self._rooms = []
@@ -178,9 +178,45 @@ class Map():
             elif self.get(dest) != Map.empty and self.get(dest).meet(elem) and self.get(dest) != self._hero:
                 self.rm(dest)
 
+    def is_ground(self, coord):
+        """Checks if the cell at the coordinates coord is empty."""
+        self.checkCoord(coord)
+        return self._mat[coord.y][coord.x] == Map.ground
+
+    def find_path(self, elem):
+        """Find a path from a monster to the hero."""
+        opened = {self.pos(elem): (0, self.pos(elem).distance(self.pos(self._hero)))}
+        closed = {}
+        current = self.pos(elem)
+
+        while current != self.pos(self._hero):
+            print(current)
+            current = min_cost(opened)
+            closed[current] = opened[current]
+            del opened[current]
+            
+            if self.get(current) == self._hero:
+                break
+
+            for way in [Coord(0, 1), Coord(0, -1), Coord(1, 0), Coord(-1, 0)]:
+                next_place = current + way # next cell to be checked
+
+                next_cost_org = closed[current] + 1  # cost of the next cell
+                next_cost_end = next_place.distance(self.pos(self._hero)) # heuristic cost of the next cell
+
+                next_cost = next_cost_org + next_cost_end # total cost of the next cell
+
+                if next_place in self and self.get(next_place) == Map.ground and not next_place in closed:
+                    if not next_place in opened or opened[next_place][0] + opened[next_place][1] > next_cost:
+                        cost_org = next_cost_org
+                        cost_end = next_cost_end
+                        current = next_place
+                        opened[current] = (cost_org, cost_end)
+
     def moveAllMonsters(self):
         """Moves all monsters in the map.
             If a monster is at distance lower than 6 from the hero, the monster advances."""
+        print(type(self._hero))
         hero_pos = self.pos(self._hero)
         for elem in self._elem:
             elem_pos = self.pos(elem)
