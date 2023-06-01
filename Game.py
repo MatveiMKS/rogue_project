@@ -103,7 +103,7 @@ class Game():
         layout = '0'
         while layout not in ['1' , '2']:
             print("Choose layout 1: zqsd or 2: wasd ")
-            layout = getch2()
+            layout = visuel.interact()
         if layout == '1':
             self.layout = 'f'
         else:
