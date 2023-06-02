@@ -10,6 +10,7 @@ from Map import Map
 from Stairs import Stairs
 from handler import heal, teleport, shoot, askDirection
 from utils import getch2
+from const import elem_type
 import theGame
 import visuel
 import pygame 
@@ -157,7 +158,7 @@ class Game():
         window, background = visuel.initialisation()
         """Main game loop"""
         self.buildFloor()
-        visuel.afficher(self._floor, background, self._hero)
+        visuel.afficher(self._floor, background, self._hero, elem_type)
         running = visuel.refresh(window, background)
         print("--- Welcome Hero! ---")
         self.change_layout()
@@ -171,11 +172,11 @@ class Game():
         while self._hero.hp > 0 and running:
             pygame.time.Clock().tick(60)
             pygame.display.flip()
-            visuel.afficher(self._floor, background, self._hero)
+            visuel.afficher(self._floor, background, self._hero, elem_type)
             running = visuel.refresh(window, background)  
             if level != self._level:
                 window, background = visuel.initialisation()
-                visuel.afficher(self._floor, background, self._hero)
+                visuel.afficher(self._floor, background, self._hero, elem_type)
                 running = visuel.refresh(window, background)
                 level += 1
             print()

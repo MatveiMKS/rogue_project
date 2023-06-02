@@ -10,35 +10,8 @@ import sys
 import random
 import copy
 
-def afficher(sol, fenetre, player):
-    elem_type = {"Goblin" : const.image_monsters,
-                 "Blob" : const.image_monsters,
-                 "Bat" : const.image_monsters,
-                 "Ork" : const.image_monsters,
-                 "Dragon" : const.image_monsters,
-                 "Weak Goblin" : const.image_monsters,
-                 "Weak Blob" : const.image_monsters,
-                 "Weak Bat" : const.image_monsters,
-                 "Weak Ork" : const.image_monsters,
-                 "Weak Dragon" : const.image_monsters,
-                 "Strong Goblin" : const.image_monsters,
-                 "Strong Blob" : const.image_monsters,
-                 "Strong Bat" : const.image_monsters,
-                 "Strong Ork" : const.image_monsters,
-                 "Strong Dragon" : const.image_monsters,
-                 "small potion": const.image_potion,
-                 "medium potion": const.image_potion,
-                 "big potion": const.image_potion,
-                 "portoloin": const.image_potion,
-                 "gold": const.image_gold,
-                 "Stairs": const.image_stairs,
-                 "throwing knife": const.image_throwing,
-                 "dagger": const.image_epee,
-                 "sword": const.image_epee,
-                 "longsword": const.image_epee,
-                 "axe": const.image_epee
-                 }
-    
+
+def afficher(sol, fenetre, player, elem_type):
     floor_1 = Char(pygame.image.load(const.image_sol).convert())
     floor_2 = Char(pygame.image.load(const.image_sol_2).convert())
     floor_3 = Char(pygame.image.load(const.image_sol_3).convert())
@@ -62,6 +35,8 @@ def afficher(sol, fenetre, player):
                 
             num_case += 1
         num_ligne += 1
+    affiche_inventory(player, fenetre, elem_type)
+    afficher_hp(player, fenetre)
 
 def initialisation():
     pygame.init()
@@ -71,8 +46,9 @@ def initialisation():
     # Window
     pygame.display.set_icon(pygame.image.load("assets/icone.png"))
     pygame.display.set_caption("Window")
-
     window = pygame.display.set_mode((1080, 720))
+
+    
 
     return window, background
 
@@ -99,13 +75,22 @@ def interact():
 
         elif event.type == pygame.KEYDOWN:
             return event.unicode
-            
-#def inventory(hero):
-    #for object 
 
-def random_expo(collect):
-    var_exp = random.expovariate(1 / 2)
-    for rarity in collect:
-        if rarity <= var_exp:
-            items = collect[rarity]
-            return copy.copy(random.choice(items))
+def affiche_inventory(hero, fenetre, elem_type):
+    num_case = 197
+    image_inventaire = pygame.transform.scale(pygame.image.load("assets/barre_inventaire.jpg").convert(), (716,104))
+    fenetre.blit(image_inventaire ,(180,600))
+    for object in hero._inventory:
+        image = pygame.transform.scale(Char(pygame.image.load(elem_type[object.name]).convert()).image, (75,75))
+        fenetre.blit(image, (num_case,617))
+        num_case += 103
+
+def afficher_hp(hero, fenetre):
+    image_coeur = pygame.transform.scale(pygame.image.load("assets/coeur.jpg").convert(), (40,40))
+    image_coeur_vide = pygame.transform.scale(pygame.image.load("assets/coeur_vide.jpg").convert(), (40,40))
+    for heart in range(15):
+        if heart + 1 <= hero.hp:
+            fenetre.blit(image_coeur, (10, 20 + (heart)*40))
+        else:
+            fenetre.blit(image_coeur_vide, (10, 20 +(heart)*40))
+
