@@ -49,16 +49,16 @@ def afficher(sol, fenetre, player):
     for ligne in sol._mat:
         num_case = 0
         for sprite in ligne:
-            x = num_case * 30 
+            x = num_case * 30
             y = num_ligne * 30
             if sprite == '.' and (sol.pos(player).distance(Coord(x/30,y/30)) < 5):
                 random.seed((x**y)*(x+y))
                 indx = random.randint(1,3)   
-                fenetre.blit(random.choice(floor[indx]).image, (x,y))
+                fenetre.blit(random.choice(floor[indx]).image, (x+240, y+15))
             elif sprite == player :
-                fenetre.blit(hero.image, (x,y))
+                fenetre.blit(hero.image, (x+240, y+15))
             elif isinstance(sprite, Element) and (sol.pos(player).distance(Coord(x/30,y/30)) < 5):
-                fenetre.blit(Char(pygame.image.load(elem_type[sprite.name]).convert()).image, (x,y))
+                fenetre.blit(Char(pygame.image.load(elem_type[sprite.name]).convert()).image, (x+240, y+15))
                 
             num_case += 1
         num_ligne += 1
