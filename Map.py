@@ -21,7 +21,7 @@ class Map():
            'q': Coord(-1, 0)}  
     empty = ' '  # A non walkable cell
 
-    def __init__(self, size=15, hero=None):
+    def __init__(self, size=20, hero=None):
         self._mat = []
         self._elem = {}
         self._rooms = []
