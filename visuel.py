@@ -77,20 +77,21 @@ def interact():
             return event.unicode
 
 def affiche_inventory(hero, fenetre, elem_type):
-    num_case = 197
-    image_inventaire = pygame.transform.scale(pygame.image.load("assets/barre_inventaire.jpg").convert(), (716,104))
-    fenetre.blit(image_inventaire ,(180,600))
+    num_case = 120
+    image_inventaire = pygame.image.load("assets/barre_inventaire.jpg").convert()
+    fenetre.blit(image_inventaire, (900,116))
     for object in hero._inventory:
-        image = pygame.transform.scale(Char(pygame.image.load(elem_type[object.name]).convert()).image, (75,75))
-        fenetre.blit(image, (num_case,617))
-        num_case += 103
+        image = pygame.transform.scale(Char(pygame.image.load(elem_type[object.name]).convert()).image, (72,72))
+        fenetre.blit(image, (904 if num_case < (6 *80 +120) else 948, num_case))
+        num_case += 80
 
 def afficher_hp(hero, fenetre):
-    image_coeur = pygame.transform.scale(pygame.image.load("assets/coeur.jpg").convert(), (40,40))
-    image_coeur_vide = pygame.transform.scale(pygame.image.load("assets/coeur_vide.jpg").convert(), (40,40))
-    for heart in range(15):
+    image_coeur = pygame.transform.scale(pygame.image.load("assets/coeur.png").convert_alpha(), (40,40))
+    image_coeur_vide = pygame.transform.scale(pygame.image.load("assets/coeur_vide.png").convert_alpha(), (40,40))
+    image_coeur = Char(image_coeur).image
+    image_coeur_vide =Char(image_coeur_vide).image
+    for heart in range(hero.hp_max):
         if heart + 1 <= hero.hp:
             fenetre.blit(image_coeur, (10, 20 + (heart)*40))
         else:
             fenetre.blit(image_coeur_vide, (10, 20 +(heart)*40))
-
