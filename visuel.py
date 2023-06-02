@@ -7,6 +7,8 @@ from Coord import Coord
 from Map import Map
 import const
 import sys
+import random
+import copy
 
 def afficher(sol, fenetre, player):
     elem_type = {"Goblin" : const.image_monsters,
@@ -37,7 +39,11 @@ def afficher(sol, fenetre, player):
                  "axe": const.image_epee
                  }
     
-    floor = Char(pygame.image.load(const.image_sol).convert())
+    floor_1 = Char(pygame.image.load(const.image_sol).convert())
+    floor_2 = Char(pygame.image.load(const.image_sol_2).convert())
+    floor_3 = Char(pygame.image.load(const.image_sol_3).convert())
+    floor_4 = Char(pygame.image.load(const.image_sol_4).convert())
+    floor = {1: [floor_1], 2: [floor_1], 3: [floor_2, floor_3, floor_4]}
     hero = Char(pygame.image.load(const.image_hero).convert())
     num_ligne = 0
     for ligne in sol._mat:
@@ -45,8 +51,10 @@ def afficher(sol, fenetre, player):
         for sprite in ligne:
             x = num_case * 30 
             y = num_ligne * 30
-            if sprite == '.' and (sol.pos(player).distance(Coord(x/30,y/30)) < 5):		   
-                fenetre.blit(floor.image, (x,y))
+            if sprite == '.' and (sol.pos(player).distance(Coord(x/30,y/30)) < 5):
+                random.seed((x**y)*(x+y))
+                indx = random.randint(1,3)   
+                fenetre.blit(random.choice(floor[indx]).image, (x,y))
             elif sprite == player :
                 fenetre.blit(hero.image, (x,y))
             elif isinstance(sprite, Element) and (sol.pos(player).distance(Coord(x/30,y/30)) < 5):
@@ -94,3 +102,10 @@ def interact():
             
 #def inventory(hero):
     #for object 
+
+def random_expo(collect):
+    var_exp = random.expovariate(1 / 2)
+    for rarity in collect:
+        if rarity <= var_exp:
+            items = collect[rarity]
+            return copy.copy(random.choice(items))
