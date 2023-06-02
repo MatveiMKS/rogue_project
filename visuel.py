@@ -1,17 +1,21 @@
+import sys
+import random
 import pygame
+
 from Char import Char
 from Char import Perso 
 from Element import Element 
 from Stairs import Stairs
 from Coord import Coord 
 from Map import Map
+import theGame
 import const
-import sys
-import random
-import copy
 
 
 def afficher(sol, fenetre, player, elem_type):
+    ''' shows the game on the screen'''
+    background = Char(pygame.image.load("assets/bg.jpg").convert())
+    fenetre.blit(background.image, (0,0))
     floor_1 = Char(pygame.image.load(const.image_sol).convert())
     floor_2 = Char(pygame.image.load(const.image_sol_2).convert())
     floor_3 = Char(pygame.image.load(const.image_sol_3).convert())
@@ -24,21 +28,30 @@ def afficher(sol, fenetre, player, elem_type):
         for sprite in ligne:
             x = num_case * 30
             y = num_ligne * 30
-            if sprite == '.' and (sol.pos(player).distance(Coord(x/30,y/30)) < 5):
-                random.seed((x**y)*(x+y))
-                indx = random.randint(1,3)   
-                fenetre.blit(random.choice(floor[indx]).image, (x+240, y+15))
-            elif sprite == player :
-                fenetre.blit(hero.image, (x+240, y+15))
-            elif isinstance(sprite, Element) and (sol.pos(player).distance(Coord(x/30,y/30)) < 5):
-                fenetre.blit(Char(pygame.image.load(elem_type[sprite.name]).convert()).image, (x+240, y+15))
+
+            pile = []
+            for room in sol._rooms: #check if the player is in the room
+                if sol.pos(player) in room and Coord(x/30, y/30) in room:
+                    pile.append((x,y))
+            
+            if (sol.pos(player).distance(Coord(x/30,y/30)) < 3) or (x,y) in pile:
+                if sprite != ' ':
+                    random.seed((x**y)*(x+y))
+                    indx = random.randint(1,3)
+                    fenetre.blit(random.choice(floor[indx]).image, (x+240, y+15))
+                if sprite == player:
+                    fenetre.blit(hero.image, (x+240, y+15))
+                elif isinstance(sprite, Element) and ((sol.pos(player).distance(Coord(x/30,y/30)) < 3) or (x,y) in pile):
+                    fenetre.blit(Char(pygame.image.load(elem_type[sprite.name]).convert_alpha()).image, (x+240, y+15))
                 
             num_case += 1
         num_ligne += 1
     affiche_inventory(player, fenetre, elem_type)
     afficher_hp(player, fenetre)
+    afficher_messages(fenetre, theGame.theGame()._messages)
 
 def initialisation():
+    ''' initializes the window and the background'''
     pygame.init()
     # Background
     background = pygame.image.load("assets/bg.jpg")
@@ -53,6 +66,7 @@ def initialisation():
     return window, background
 
 def refresh(window, background):
+    ''' refreshes the window'''
     running = True
         # Background
     window.blit(background, (0, 0))
@@ -65,7 +79,7 @@ def refresh(window, background):
             running = False
     return running
 def interact():
-    
+    ''' waits for the user to press a key and returns the key pressed'''
     pygame.event.clear()
     while True:
         event = pygame.event.wait()
@@ -77,17 +91,22 @@ def interact():
             return event.unicode
 
 def affiche_inventory(hero, fenetre, elem_type):
+    ''' shows the inventory on the screen'''
     num_case = 120
     image_inventaire = pygame.image.load("assets/barre_inventaire.jpg").convert()
     fenetre.blit(image_inventaire, (900,116))
     for object in hero._inventory:
-        image = pygame.transform.scale(Char(pygame.image.load(elem_type[object.name]).convert()).image, (72,72))
+        image = pygame.transform.scale(Char(pygame.image.load(elem_type[object.name]).convert_alpha()).image, (72,72))
         fenetre.blit(image, (904 if num_case < (6 *80 +120) else 948, num_case))
         num_case += 80
 
 def afficher_hp(hero, fenetre):
-    image_coeur = pygame.transform.scale(pygame.image.load("assets/coeur.png").convert_alpha(), (40,40))
-    image_coeur_vide = pygame.transform.scale(pygame.image.load("assets/coeur_vide.png").convert_alpha(), (40,40))
+    ''' shows the hp on the screen'''
+    image_coeur =\
+    pygame.transform.scale(pygame.image.load("assets/coeur.png").convert_alpha(), (40,40))
+
+    image_coeur_vide =\
+    pygame.transform.scale(pygame.image.load("assets/coeur_vide.png").convert_alpha(), (40,40))
     image_coeur = Char(image_coeur).image
     image_coeur_vide =Char(image_coeur_vide).image
     for heart in range(hero.hp_max):
@@ -95,3 +114,14 @@ def afficher_hp(hero, fenetre):
             fenetre.blit(image_coeur, (10, 20 + (heart)*40))
         else:
             fenetre.blit(image_coeur_vide, (10, 20 +(heart)*40))
+
+def afficher_messages(fenetre, messages):
+    ''' shows the messages on the screen'''
+    size = 20 if len(messages) < 3 else 15
+    font = pygame.font.Font(None, size)
+    for i, el in enumerate(messages):
+        text = font.render(el, 1, (255, 255, 255))
+        fenetre.blit(text, (290, 660 + i*15))
+
+def afficher_armure(fenetre, hero):
+    pass
