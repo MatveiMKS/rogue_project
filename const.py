@@ -1,5 +1,11 @@
-image_sol = "assets/floor_cyp.png"
+
+image_sol = "assets/floor_tiles.jpg"
+image_sol_2 = "assets/floor_tiles_2.jpg"
+image_sol_3 = "assets/floor_tiles_3.jpg"
+image_sol_4 = "assets/floor_tiles_4.jpg"
+
 image_hero = "assets/robot_down.jpg"
+
 image_monsters = "assets/monster.png"
 image_stairs = "assets/stairs.jpg"
 image_potion = "assets/potion.png"
