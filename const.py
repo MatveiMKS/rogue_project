@@ -1,4 +1,8 @@
-image_sol = "assets/floor_tales.jpg"
+image_sol = "assets/floor_tiles.jpg"
+image_sol_2 = "assets/floor_tiles_2.jpg"
+image_sol_3 = "assets/floor_tiles_3.jpg"
+image_sol_4 = "assets/floor_tiles_4.jpg"
+
 image_hero = "assets/dk_bas.png"
 image_monsters = "assets/monster.png"
 image_stairs = "assets/stairs.jpg"
