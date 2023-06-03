@@ -94,14 +94,11 @@ def interact():
 
 def affiche_inventory(hero, fenetre, elem_type):
     ''' shows the inventory on the screen'''
-    num_case = 120
     image_inventaire = pygame.image.load("assets/barre_inventaire.jpg").convert()
     fenetre.blit(image_inventaire, (900,116))
-    for object in hero._inventory:
-        image = pygame.transform.scale(Char(pygame.image.load(elem_type[object.name]).convert_alpha()).image, (72,72))
-        if num_case >= (6 *80 +120):
-            num_case = 120
-        fenetre.blit(image, (904 if num_case <= (6 *80 +120) else 948, num_case))
+    for num_case, elements in enumerate(hero._inventory):
+        image = pygame.transform.scale(Char(pygame.image.load(elem_type[elements.name]).convert_alpha()).image, (72,72))
+        fenetre.blit(image, (904 if num_case < 6 else 948, 120 + num_case*80))
         num_case += 80
 
 def afficher_hp(hero, fenetre):
