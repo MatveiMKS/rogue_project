@@ -13,7 +13,7 @@ class Hero(Creature):
 
     armory = {'leather helmet' : ['head', 1], 'leather chest' : ['chest', 2], 'leather legs' : ['legs', 2], 'leather boots' : ['boots', 1],
              'iron helmet' : ['head', 2], 'iron chest' : ['chest', 4], 'iron legs' : ['legs', 4], 'iron boots' : ['boots', 2],
-             'steel helmet' : ['head', 3], 'steel chest' : ['chest', 6], 'steel legs' : ['legs', 6], 'steel boots' : ['boots', 3],}
+             'steel helmet' : ['head', 3], 'steel chest' : ['chest', 6], 'steel legs' : ['legs', 6], 'steel boots' : ['boots', 3]}
 
     weapons = {'barehands': 2,'dagger': 3, 'axe': 4, 'sword': 5, 'longsword': 6, 'greatsword': 7,}
 
@@ -30,6 +30,7 @@ class Hero(Creature):
         self.hp_max = 10
         self.money = 0
         self.equipments = 'barehands'
+        self.sens = 'z'
 
     def gain_money(self, amount, elem):
         ''' adds money to hero'''
@@ -138,13 +139,13 @@ class Hero(Creature):
         if damage > 0:
             self.hp -= damage if crit != 10 else damage * 2
             if crit == 10:
-                theGame.theGame().addMessage(f"The {other.name} lands a critical hit on the {self.description()}")
-            theGame.theGame().addMessage(f"The {other.name} hits the {self.description()}"
+                theGame.theGame().addMessage(f"The {other.name} lands a critical hit on the {self.name}")
+            theGame.theGame().addMessage(f"The {other.name} hits the {self.name}"
                                          f"for {damage if crit != 10 else damage*2} damage")
         else:
             if crit == 10:
-                theGame.theGame().addMessage(f"The {other.name} pierces through the {self.description()}'s armor"
-                                             f"The {other.name} hits the {self.description()} "
+                theGame.theGame().addMessage(f"The {other.name} pierces through the {self.name}'s armor"
+                                             f"The {other.name} hits the {self.name} "
                                              f"for {str(other.strength)} damage")
                 self.hp -= other.strength
             else:

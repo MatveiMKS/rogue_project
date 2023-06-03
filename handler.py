@@ -3,6 +3,7 @@
 import Coord
 import Creature as cr
 import theGame
+from visuel import interact
 from utils import getch2
 
 def heal(creature, strength):
@@ -57,6 +58,6 @@ def askDirection(layout):
     direction = None
     while direction not in directions:
         print("Which direction? (direction keys)")
-        direction = getch2()
+        direction = interact()
         print(direction)
     return directions[direction]

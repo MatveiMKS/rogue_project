@@ -70,6 +70,10 @@ class Game():
                 'q': lambda h: theGame.theGame()._floor.move(h, Coord(-1, 0)),
                 's': lambda h: theGame.theGame()._floor.move(h, Coord(0, 1)),
                 'd': lambda h: theGame.theGame()._floor.move(h, Coord(1, 0)),
+                'a' : lambda h: theGame.theGame()._floor.move(h, Coord(-1,-1)), 
+                'e' : lambda h: theGame.theGame()._floor.move(h, Coord(1,-1)),
+                'x' : lambda h: theGame.theGame()._floor.move(h, Coord(1,1)), 
+                'w' : lambda h: theGame.theGame()._floor.move(h, Coord(-1,1)),
                 'i': lambda h: theGame.theGame().addMessage(h.fullDescription()),
                 'k': lambda h: h.kill(),
                 'u': lambda h: h.use(theGame.theGame().select(h._inventory)),
@@ -83,6 +87,10 @@ class Game():
                     'a': lambda h: theGame.theGame()._floor.move(h, Coord(-1, 0)),
                     's': lambda h: theGame.theGame()._floor.move(h, Coord(0, 1)),
                     'd': lambda h: theGame.theGame()._floor.move(h, Coord(1, 0)),
+                    'q' : lambda h: theGame.theGame()._floor.move(h, Coord(-1,-1)), 
+                    'e' : lambda h: theGame.theGame()._floor.move(h, Coord(1,-1)),
+                    'x' : lambda h: theGame.theGame()._floor.move(h, Coord(1,1)), 
+                    'z' : lambda h: theGame.theGame()._floor.move(h, Coord(-1,1)),
                     'i': lambda h: theGame.theGame().addMessage(h.fullDescription()),
                     'k': lambda h: h.kill(),
                     'u': lambda h: h.use(theGame.theGame().select(h._inventory)),
@@ -91,7 +99,19 @@ class Game():
                     'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name),
                     'r': lambda h: h.drop(theGame.theGame().select(h._inventory))
                     }
-
+    _actions_wasd.update({
+                        '0' : lambda h: h.use(h._inventory[0]) if len(h._inventory) > 0 else None,
+                        '1' : lambda h: h.use(h._inventory[1]) if len(h._inventory) > 1 else None,
+                        '2' : lambda h: h.use(h._inventory[2]) if len(h._inventory) > 2 else None,
+                        '3' : lambda h: h.use(h._inventory[3]) if len(h._inventory) > 3 else None,
+                        '4' : lambda h: h.use(h._inventory[4]) if len(h._inventory) > 4 else None,
+                        '5' : lambda h: h.use(h._inventory[5]) if len(h._inventory) > 5 else None,
+                        '6' : lambda h: h.use(h._inventory[6]) if len(h._inventory) > 6 else None,
+                        '7' : lambda h: h.use(h._inventory[7]) if len(h._inventory) > 7 else None,
+                        '8' : lambda h: h.use(h._inventory[8]) if len(h._inventory) > 8 else None,
+                        '9' : lambda h: h.use(h._inventory[9]) if len(h._inventory) > 9 else None,
+                    })
+    
     def __init__(self, level=1, hero=None):
         self._level = level
         self._messages = []
@@ -103,7 +123,7 @@ class Game():
         ''' Changes the layout'''
         layout = '0'
         while layout not in ['1' , '2']:
-            print("Choose layout 1: zqsd or 2: wasd ")
+            self.addMessage("Choose your layout : 1 for AZERTY, 2 for QWERTY")
             layout = visuel.interact()
         if layout == '1':
             self.layout = 'f'
@@ -161,19 +181,24 @@ class Game():
         visuel.afficher(self._floor, background, self._hero, elem_type)
         running = visuel.refresh(window, background)
         print("--- Welcome Hero! ---")
+
         self.change_layout()
         layout = self.layout
         if layout == 'f':
             actions = Game._actions
         else:
             actions = Game._actions_wasd
+
         level = 2
         print(self._level)
+        sens = 'z' if layout == 'f' else 'w'
         while self._hero.hp > 0 and running:
+            
             pygame.time.Clock().tick(60)
             pygame.display.flip()
+            self._hero.sens = sens
             visuel.afficher(self._floor, background, self._hero, elem_type)
-            running = visuel.refresh(window, background)  
+            running = visuel.refresh(window, background)
             if level != self._level:
                 window, background = visuel.initialisation()
                 visuel.afficher(self._floor, background, self._hero, elem_type)
@@ -186,7 +211,7 @@ class Game():
             key_press = visuel.interact()
             if key_press in actions:
                 actions[key_press](self._hero)
-
+            sens = key_press
             self._floor.moveAllMonsters()
         print("--- Game Over ---")
         
