@@ -56,6 +56,7 @@ def afficher(sol, fenetre, player, elem_type):
     afficher_hp(player, fenetre)
     afficher_messages(fenetre, theGame.theGame()._messages)
     afficher_armure(fenetre, player)
+    afficher_arme(fenetre, player)
 
 def initialisation():
     ''' initializes the window and the background'''
@@ -97,12 +98,14 @@ def affiche_inventory(hero, fenetre, elem_type):
     num_case = 120
     image_inventaire = pygame.image.load("assets/barre_inventaire.jpg").convert()
     fenetre.blit(image_inventaire, (900,116))
+    num_object = 0
     for object in hero._inventory:
         image = pygame.transform.scale(Char(pygame.image.load(elem_type[object.name]).convert_alpha()).image, (72,72))
-        if num_case >= (6 *80 +120):
+        if num_case >= (5 *80 +120):
             num_case = 120
-        fenetre.blit(image, (904 if num_case <= (6 *80 +120) else 948, num_case))
+        fenetre.blit(image, (904 if num_object <= 4 else 985, num_case))
         num_case += 80
+        num_object += 1
 
 def afficher_hp(hero, fenetre):
     ''' shows the hp on the screen'''
@@ -134,7 +137,23 @@ def afficher_armure(fenetre, hero):
         image = image_armure[armure][hero.armors[armure][1]]
         #image_armure[armure] => dictionary of the armor piece
         #[hero.armors[armure][1]] => its material
-        fenetre.blit(pygame.image.load(image).convert_alpha(), (100, 20 if armure == 'head'
+        fenetre.blit(pygame.image.load(image).convert_alpha(), (125, 20 if armure == 'head'
                              else 85 if armure == 'chest'
                              else 160 if armure == 'legs'
                              else 240))
+    afficher_armure_points(fenetre, hero)
+        
+def afficher_armure_points(fenetre, hero):
+    '''show the armor points on the screen'''
+    image_armure = pygame.transform.scale(pygame.image.load(const.image_armure_points).convert_alpha(), (40,40))
+    for armure in range(hero.armor):
+        fenetre.blit(image_armure, (70, 20 + (armure)*40))
+
+def afficher_arme(fenetre, hero):
+    '''show the weapons used on the screen'''
+    if hero.equipments != "barehands":
+        image_weapon = \
+            pygame.transform.scale(pygame.image.load(const.elem_type[hero.equipments]).convert_alpha(), (70,70))
+        fenetre.blit(image_weapon, (125, 310))
+
+
