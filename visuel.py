@@ -34,7 +34,7 @@ def afficher(sol, fenetre, player, elem_type):
                 if sol.pos(player) in room and Coord(x/30, y/30) in room:
                     pile.append((x,y))
 
-            if (sol.pos(player).distance(Coord(x/30,y/30)) < 3) or (x,y) in pile or (x,y) in sol.loaded:
+            if (sol.pos(player).distance(Coord(x/30,y/30)) < 4) or (x,y) in pile or (x,y) in sol.loaded:
                 if sprite != ' ':
                     random.seed((x**y)*(x+y))
                     indx = random.randint(1,3)

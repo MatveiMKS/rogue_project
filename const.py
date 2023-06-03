@@ -33,7 +33,9 @@ image_gold = "assets/gold.png"
 
 ##WEAPONS##
 image_throwing = "assets/bow.png"
-image_epee = "assets/epee.jpg"
+image_epee = "assets/epee.png"
+image_axe = "assets/axe.png"
+image_longsword = "assets/longsword.png"
 
 ###ARMOR##
 image_helmet = "assets/helmet.png"
@@ -75,8 +77,8 @@ elem_type = {"Goblin" :  image_monsters,
                 "throwing knife":  image_throwing,
                 "dagger":  image_epee,
                 "sword":  image_epee,
-                "longsword":  image_epee,
-                "axe":  image_epee,
+                "longsword":  image_longsword,
+                "axe":  image_axe,
                 'leather helmet' : image_helmet,
                 'leather chest' : image_chest,
                 'leather legs' : image_pants,
