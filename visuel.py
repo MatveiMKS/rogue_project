@@ -11,7 +11,6 @@ from Map import Map
 import theGame
 import const
 
-
 def afficher(sol, fenetre, player, elem_type):
     ''' shows the game on the screen'''
     background = Char(pygame.image.load("assets/bg.jpg").convert())
@@ -34,15 +33,15 @@ def afficher(sol, fenetre, player, elem_type):
             for room in sol._rooms: #check if the player is in the room
                 if sol.pos(player) in room and Coord(x/30, y/30) in room:
                     pile.append((x,y))
-            
+
             if (sol.pos(player).distance(Coord(x/30,y/30)) < 3) or (x,y) in pile or (x,y) in sol.loaded:
                 if sprite != ' ':
                     random.seed((x**y)*(x+y))
                     indx = random.randint(1,3)
                     fenetre.blit(random.choice(floor[indx]).image, (x+240, y+15))
                 if sprite == player:
-                    if player.sens in ['z','q', 's', 'd', 'a', 'w']:
-                        
+                    if player.sens in (['z','q', 's', 'd'] if theGame.theGame().layout == 'f' else ['w','a', 's', 'd']):
+
                         fenetre.blit(pygame.image.load(images_hero[player.sens]).convert_alpha(), (x+240, y+15))
                     else:
                         fenetre.blit(hero.image, (x+240, y+15))
@@ -90,8 +89,6 @@ def interact():
         event = pygame.event.wait()
         if event.type == pygame.QUIT:
             pygame.quit()
-        
-
         elif event.type == pygame.KEYDOWN:
             return event.unicode
 
