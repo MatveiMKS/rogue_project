@@ -33,7 +33,8 @@ image_gold = "assets/gold.png"
 
 ##WEAPONS##
 image_throwing = "assets/bow.png"
-image_epee = "assets/epee.jpg"
+image_epee = "assets/epee.png"
+image_dague = "assets/dagues.png"
 
 ###ARMOR##
 image_helmet = "assets/helmet.png"
@@ -50,6 +51,8 @@ image_rare_helmet = "assets/rare_helmet.png"
 image_rare_chest = "assets/rare_chest.png"
 image_rare_pants = "assets/rare_pants.png"
 image_rare_boots = "assets/rare_boots.png"
+
+image_armure_points = "assets/armure_points.png"
 
 elem_type = {"Goblin" :  image_monsters,
                 "Blob" :  image_monsters,
@@ -73,7 +76,7 @@ elem_type = {"Goblin" :  image_monsters,
                 "gold":  image_gold,
                 "Stairs":  image_stairs,
                 "throwing knife":  image_throwing,
-                "dagger":  image_epee,
+                "dagger":  image_dague,
                 "sword":  image_epee,
                 "longsword":  image_epee,
                 "axe":  image_epee,
