@@ -30,6 +30,7 @@ class Hero(Creature):
         self.hp_max = 10
         self.money = 0
         self.equipments = 'barehands'
+        self.sens = 'z'
 
     def gain_money(self, amount, elem):
         ''' adds money to hero'''

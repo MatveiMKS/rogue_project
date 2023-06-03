@@ -37,6 +37,7 @@ class Map():
         self.put(self._rooms[0].center(), hero)
         for r in self._rooms:
             r.decorate(self)
+        self.loaded = []
 
     def addRoom(self, room):
         """Adds a room in the map."""

@@ -5,7 +5,21 @@ image_sol_3 = "assets/floor_tiles_3.jpg"
 image_sol_4 = "assets/floor_tiles_4.jpg"
 
 ##HERO##
-image_hero = "assets/robot_down.jpg"
+image_hero = "assets/hero_up.png"
+
+hero_images_f = {
+    "z": "assets/hero_up.png",
+    "s": "assets/hero_down.png",
+    "q": "assets/hero_left.png",
+    "d": "assets/hero_right.png"
+}
+
+hero_images_e = {
+    "w": "assets/hero_up.png",
+    "s": "assets/hero_down.png",
+    "a": "assets/hero_left.png",
+    "d": "assets/hero_right.png"
+}
 
 ##MONSTERS##
 image_monsters = "assets/monster.png"
@@ -76,3 +90,43 @@ elem_type = {"Goblin" :  image_monsters,
                 'steel legs' : image_rare_pants,
                 'steel boots' : image_rare_boots,
                 }
+
+
+###ARMOR###
+
+# key => protection used to determine type of armor
+casques = {
+        1 : "assets/casque.png",
+        2 : "assets/casque_mid.png",
+        3 : "assets/casque_rare.png",
+        0 : "assets/casque_vide.png"
+}
+
+plastrons = {
+        2 : "assets/plastron.png",
+        4 : "assets/plastron_mid.png",
+        6 : "assets/plastron_rare.png",
+        0 : "assets/plastron_vide.png"
+}
+
+pantalons = {
+        2 : "assets/pantalon.png",
+        4 : "assets/pantalon_mid.png",
+        6 : "assets/pantalon_rare.png",
+        0 : "assets/pantalon_vide.png"
+}
+
+bottes = {
+        1 : "assets/bottes.png",
+        2 : "assets/bottes_mid.png",
+        3 : "assets/bottes_rare.png",
+        0 : "assets/bottes_vide.png"
+}
+
+# key => part of the body for armor
+images_armure = {
+        "head": casques,
+        "chest": plastrons,
+        "legs": pantalons,
+        "boots": bottes
+    }

@@ -21,8 +21,9 @@ def afficher(sol, fenetre, player, elem_type):
     floor_3 = Char(pygame.image.load(const.image_sol_3).convert())
     floor_4 = Char(pygame.image.load(const.image_sol_4).convert())
     floor = {1: [floor_1], 2: [floor_1], 3: [floor_2, floor_3, floor_4]}
-    hero = Char(pygame.image.load(const.image_hero).convert())
+    hero = Char(pygame.image.load(const.image_hero).convert_alpha())
     num_ligne = 0
+    images_hero = const.hero_images_f if theGame.theGame().layout == 'f' else const.hero_images_e
     for ligne in sol._mat:
         num_case = 0
         for sprite in ligne:
@@ -34,21 +35,28 @@ def afficher(sol, fenetre, player, elem_type):
                 if sol.pos(player) in room and Coord(x/30, y/30) in room:
                     pile.append((x,y))
             
-            if (sol.pos(player).distance(Coord(x/30,y/30)) < 3) or (x,y) in pile:
+            if (sol.pos(player).distance(Coord(x/30,y/30)) < 3) or (x,y) in pile or (x,y) in sol.loaded:
                 if sprite != ' ':
                     random.seed((x**y)*(x+y))
                     indx = random.randint(1,3)
                     fenetre.blit(random.choice(floor[indx]).image, (x+240, y+15))
                 if sprite == player:
-                    fenetre.blit(hero.image, (x+240, y+15))
-                elif isinstance(sprite, Element) and ((sol.pos(player).distance(Coord(x/30,y/30)) < 3) or (x,y) in pile):
+                    if player.sens in ['z','q', 's', 'd', 'a', 'w']:
+                        
+                        fenetre.blit(pygame.image.load(images_hero[player.sens]).convert_alpha(), (x+240, y+15))
+                    else:
+                        fenetre.blit(hero.image, (x+240, y+15))
+
+                elif isinstance(sprite, Element) and ((x,y) in pile or (x,y) in sol.loaded):
                     fenetre.blit(Char(pygame.image.load(elem_type[sprite.name]).convert_alpha()).image, (x+240, y+15))
+                sol.loaded.append((x,y))
                 
             num_case += 1
         num_ligne += 1
     affiche_inventory(player, fenetre, elem_type)
     afficher_hp(player, fenetre)
     afficher_messages(fenetre, theGame.theGame()._messages)
+    afficher_armure(fenetre, player)
 
 def initialisation():
     ''' initializes the window and the background'''
@@ -60,9 +68,6 @@ def initialisation():
     pygame.display.set_icon(pygame.image.load("assets/icone.png"))
     pygame.display.set_caption("Window")
     window = pygame.display.set_mode((1080, 720))
-
-    
-
     return window, background
 
 def refresh(window, background):
@@ -97,7 +102,9 @@ def affiche_inventory(hero, fenetre, elem_type):
     fenetre.blit(image_inventaire, (900,116))
     for object in hero._inventory:
         image = pygame.transform.scale(Char(pygame.image.load(elem_type[object.name]).convert_alpha()).image, (72,72))
-        fenetre.blit(image, (904 if num_case < (6 *80 +120) else 948, num_case))
+        if num_case >= (6 *80 +120):
+            num_case = 120
+        fenetre.blit(image, (904 if num_case <= (6 *80 +120) else 948, num_case))
         num_case += 80
 
 def afficher_hp(hero, fenetre):
@@ -124,4 +131,13 @@ def afficher_messages(fenetre, messages):
         fenetre.blit(text, (290, 660 + i*15))
 
 def afficher_armure(fenetre, hero):
-    pass
+    ''' shows the armor on the screen'''
+    image_armure = const.images_armure
+    for armure in hero.armors:
+        image = image_armure[armure][hero.armors[armure][1]]
+        #image_armure[armure] => dictionary of the armor piece
+        #[hero.armors[armure][1]] => its material
+        fenetre.blit(pygame.image.load(image).convert_alpha(), (100, 20 if armure == 'head'
+                             else 85 if armure == 'chest'
+                             else 160 if armure == 'legs'
+                             else 240))
