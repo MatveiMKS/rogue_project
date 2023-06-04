@@ -13,6 +13,7 @@ import const
 
 def afficher(sol, fenetre, player, elem_type):
     ''' shows the game on the screen'''
+    ##chargement des images
     background = Char(pygame.image.load("assets/bg.jpg").convert())
     fenetre.blit(background.image, (0,0))
     floor_1 = Char(pygame.image.load(const.image_sol).convert())
@@ -21,9 +22,10 @@ def afficher(sol, fenetre, player, elem_type):
     floor_4 = Char(pygame.image.load(const.image_sol_4).convert())
     floor = {1: [floor_1], 2: [floor_1], 3: [floor_2, floor_3, floor_4]}
     hero = Char(pygame.image.load(const.image_hero).convert_alpha())
-    num_ligne = 0
+
+
     images_hero = const.hero_images_f if theGame.theGame().layout == 'f' else const.hero_images_e
-    for ligne in sol._mat:
+    for num_ligne, ligne in enumerate(sol._mat):
         num_case = 0
         for sprite in ligne:
             x = num_case * 30

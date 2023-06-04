@@ -3,6 +3,7 @@ image_sol = "assets/floor_tiles.jpg"
 image_sol_2 = "assets/floor_tiles_2.jpg"
 image_sol_3 = "assets/floor_tiles_3.jpg"
 image_sol_4 = "assets/floor_tiles_4.jpg"
+images_sol = [image_sol, image_sol_2, image_sol_3, image_sol_4]
 
 ##HERO##
 image_hero = "assets/hero_up.png"
@@ -57,9 +58,11 @@ image_gold = "assets/gold.png"
 ##WEAPONS##
 image_throwing = "assets/bow.png"
 image_epee = "assets/epee.png"
+
 image_axe = "assets/axe.png"
 image_longsword = "assets/longsword.png"
 image_dagger = "assets/dagger.png"
+
 
 ###ARMOR##
 image_helmet = "assets/helmet.png"
