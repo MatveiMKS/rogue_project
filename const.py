@@ -52,13 +52,15 @@ image_goblin = "assets/goblin.png"
 
 ##ELEMENTS##
 image_stairs = "assets/stairs.png"
-image_potion = "assets/potion.png"
 image_gold = "assets/gold.png"
+image_potion = "assets/potion.png"
+image_small_potion = "assets/small_potion.png"
+image_big_potion = "assets/medium_potion.png"
+image_portoloin = "assets/portoloin.png"
 
 ##WEAPONS##
 image_throwing = "assets/bow.png"
 image_epee = "assets/epee.png"
-
 image_axe = "assets/axe.png"
 image_longsword = "assets/longsword.png"
 image_dagger = "assets/dagger.png"
@@ -93,17 +95,18 @@ elem_type = {"Goblin" :  image_goblin,
                 "Weak Bat" :  image_weak_bat,
                 "Weak Ork" :  image_weak_ork,
                 "Weak Dragon" :  image_weak_dragon,
-                
+
                 "Strong Goblin" :  image_strong_goblin,
                 "Strong Blob" :  image_strong_blob,
                 "Strong Bat" :  image_strong_bat,
                 "Strong Ork" :  image_strong_ork,
                 "Strong Dragon" :  image_strong_dragon,
 
-                "small potion":  image_potion,
+                "small potion":  image_small_potion,
                 "medium potion":  image_potion,
-                "big potion":  image_potion,
-                "portoloin":  image_potion,
+                "big potion":  image_big_potion,
+
+                "portoloin":  image_portoloin,
                 "gold":  image_gold,
                 "Stairs":  image_stairs,
                 "throwing knife":  image_throwing,
