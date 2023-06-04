@@ -27,6 +27,7 @@ Executer le fichier main.py et puis utilisez les touches z q s d pour vous depla
 - xp and level up (1)
 - limit inventory + health (1)
 - add ability to drop items (1)
+- Déplacement en diagonale pour Héro et Monstres (1)
 - interface graphique (4)
 - visibility fog (3)
 ## Fonctionnalités à implementer:
