@@ -83,8 +83,6 @@ image_rare_helmet = "assets/rare_helmet.png"
 image_rare_chest = "assets/rare_chest.png"
 image_rare_pants = "assets/rare_pants.png"
 image_rare_boots = "assets/rare_boots.png"
-image_armure_points = "assets/armure_points.png"
-
 
 elem_type = {"Robot" :  image_robot,
                 "Blob" :  image_blob,
@@ -169,3 +167,5 @@ images_armure = {
         "legs": pantalons,
         "boots": bottes
     }
+
+image_armure_points = "assets/armure_points.png"

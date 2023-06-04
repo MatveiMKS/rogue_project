@@ -178,18 +178,17 @@ class Game():
     def play(self):
         running = True
         window, background = visuel.initialisation()
-        """Main game loop"""
-        self.buildFloor()
-        visuel.afficher(self._floor, background, self._hero, elem_type)
-        running = visuel.refresh(window, background)
-        print("--- Welcome Hero! ---")
-
         self.change_layout()
         layout = self.layout
         if layout == 'f':
             actions = Game._actions
         else:
             actions = Game._actions_wasd
+        """Main game loop"""
+        self.buildFloor()
+        visuel.afficher(self._floor, background, self._hero, elem_type)
+        running = visuel.refresh(window, background)
+        print("--- Welcome Hero! ---")
 
         level = 2
         print(self._level)
