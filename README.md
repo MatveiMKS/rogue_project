@@ -19,6 +19,7 @@ Avancer-Reculer-Droite-Gauche : z-s-q-d
 Utiliser un objet de l’inventaire: [0-9]
 Lâcher un objet : r
 Quitter le jeu : k
+Touche de debuggage : i
 
 
 ## Fonctionnalités implétementées en plus:
