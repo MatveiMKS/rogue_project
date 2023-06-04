@@ -42,7 +42,7 @@ class Hero(Creature):
         if self.xp >= self.level * 10:
             self.level += 1
             self.xp = 0
-            self.hp_max += 2
+            self.hp_max += 2 if self.hp_max < 16 else 0
             self.hp += 2
             theGame.theGame().addMessage(f"The {self.name} levels up to level {self.level}")
             return True
