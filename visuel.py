@@ -13,6 +13,7 @@ import const
 
 def afficher(sol, fenetre, player, elem_type):
     ''' shows the game on the screen'''
+    ##chargement des images
     background = Char(pygame.image.load("assets/bg.jpg").convert())
     fenetre.blit(background.image, (0,0))
     floor_1 = Char(pygame.image.load(const.image_sol).convert())
@@ -21,9 +22,10 @@ def afficher(sol, fenetre, player, elem_type):
     floor_4 = Char(pygame.image.load(const.image_sol_4).convert())
     floor = {1: [floor_1], 2: [floor_1], 3: [floor_2, floor_3, floor_4]}
     hero = Char(pygame.image.load(const.image_hero).convert_alpha())
-    num_ligne = 0
+
+
     images_hero = const.hero_images_f if theGame.theGame().layout == 'f' else const.hero_images_e
-    for ligne in sol._mat:
+    for num_ligne, ligne in enumerate(sol._mat):
         num_case = 0
         for sprite in ligne:
             x = num_case * 30
@@ -34,7 +36,7 @@ def afficher(sol, fenetre, player, elem_type):
                 if sol.pos(player) in room and Coord(x/30, y/30) in room:
                     pile.append((x,y))
 
-            if (sol.pos(player).distance(Coord(x/30,y/30)) < 3) or (x,y) in pile or (x,y) in sol.loaded:
+            if (sol.pos(player).distance(Coord(x/30,y/30)) < 4) or (x,y) in pile or (x,y) in sol.loaded:
                 if sprite != ' ':
                     random.seed((x**y)*(x+y))
                     indx = random.randint(1,3)
@@ -95,17 +97,11 @@ def interact():
 
 def affiche_inventory(hero, fenetre, elem_type):
     ''' shows the inventory on the screen'''
-    num_case = 120
     image_inventaire = pygame.image.load("assets/barre_inventaire.jpg").convert()
     fenetre.blit(image_inventaire, (900,116))
-    num_object = 0
-    for object in hero._inventory:
-        image = pygame.transform.scale(Char(pygame.image.load(elem_type[object.name]).convert_alpha()).image, (72,72))
-        if num_case >= (5 *80 +120):
-            num_case = 120
-        fenetre.blit(image, (904 if num_object <= 4 else 985, num_case))
-        num_case += 80
-        num_object += 1
+    for num_case, elements in enumerate(hero._inventory):
+        image = pygame.transform.scale(Char(pygame.image.load(elem_type[elements.name]).convert_alpha()).image, (72,72))
+        fenetre.blit(image, (904 if num_case < 6 else 948, 120 + num_case*80))
 
 def afficher_hp(hero, fenetre):
     ''' shows the hp on the screen'''
