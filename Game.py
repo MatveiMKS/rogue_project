@@ -169,7 +169,9 @@ class Game():
     def select(self, inventory):
         ''' Select an item from an inventory'''
         print("Choose item> " + str([str(inventory.index(item)) + ": " + item.name for item in inventory]))
-        key_press = visuel.interact()
+        key_press = None
+        while key_press not in [str(i) for i in range(len(inventory))]:
+            key_press = visuel.interact()
         if key_press.isdigit() and int(key_press) in range(len(inventory)):
             return inventory[int(key_press)]
 
