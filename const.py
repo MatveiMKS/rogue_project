@@ -159,3 +159,5 @@ images_armure = {
         "legs": pantalons,
         "boots": bottes
     }
+
+image_armure_points = "assets/armure_points.png"
