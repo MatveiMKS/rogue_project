@@ -9,7 +9,6 @@ from Hero import Hero
 from Map import Map
 from Stairs import Stairs
 from handler import heal, teleport, shoot, askDirection
-from utils import getch2
 from const import elem_type
 import theGame
 import visuel

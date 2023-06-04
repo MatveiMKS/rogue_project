@@ -14,22 +14,42 @@ G5
 ## Structure:
 
 Pour essayer le projet:
-Executer le fichier main.py et puis utilisez les touches z q s d pour vous deplacer
+Executer le fichier main.py ou bien taper la commande "python 3 main.py" dans le cmd et puis utilisez les touches : 
+Avancer-Reculer-Droite-Gauche : z-s-q-d
+Utiliser un objet de l’inventaire: [0-9]
+Lâcher un objet : r
+Quitter le jeu : k
+Touche de debuggage : i
+
 
 ## Fonctionnalités implétementées en plus:
 - option de choix de disposition clavier (1)
+- déplacement en diagonale (1)
 - add items:
     1. Potions (small, medium, big) (1)
     2. Weapoms (add strenght) (1)
     3. Armor (add resistance) (1)
 - add crit / dodge chance (1)
-- add shooting feature (for bows + magic) (1)
+- add shooting feature (for bows) (1)
 - xp and level up (1)
 - limit inventory + health (1)
 - add ability to drop items (1)
 - interface graphique (4)
 - visibility fog (3)
+
+Total: 17 points / 15 nécessaires
 ## Fonctionnalités à implementer:
 - pathfinding (Matvei)
 - magie (Theophile) 
 - add boss
+
+## Version:
+ - python : 3.11.3
+ - pygame : 2.4.0
+OS : Windows 10
+
+## Requirements 
+- pygame
+- math
+- random
+- copy
