@@ -1,12 +1,11 @@
+''' This module contains the functions that show the game on the screen'''
+
 import random
 import pygame
 
 from Char import Char
-from Char import Perso 
-from Element import Element 
-from Stairs import Stairs
-from Coord import Coord 
-from Map import Map
+from Element import Element
+from Coord import Coord
 import theGame
 import const
 
@@ -22,6 +21,8 @@ def afficher(sol, fenetre, player, elem_type):
     hero = Char(pygame.image.load(const.image_hero).convert_alpha())
     num_ligne = 0
     images_hero = const.hero_images_f if theGame.theGame().layout == 'f' else const.hero_images_e
+
+    # loops through the matrix of the floor and displays the elements
     for ligne in sol._mat:
         num_case = 0
         for sprite in ligne:
@@ -48,7 +49,7 @@ def afficher(sol, fenetre, player, elem_type):
                 elif isinstance(sprite, Element) and ((x,y) in pile or (x,y) in sol.loaded):
                     fenetre.blit(Char(pygame.image.load(elem_type[sprite.name]).convert_alpha()).image, (x+240, y+15))
                 sol.loaded.append((x,y))
-                
+
             num_case += 1
         num_ligne += 1
     affiche_inventory(player, fenetre, elem_type)
@@ -61,8 +62,6 @@ def initialisation():
     ''' initializes the window and the background'''
     pygame.init()
     # Background
-
-
     background = pygame.image.load("assets/bg.jpg")
 
     # Window
@@ -74,7 +73,7 @@ def initialisation():
 def refresh(window, background):
     ''' refreshes the window'''
     running = True
-        # Background
+    # Background
     window.blit(background, (0, 0))
 
     # Update
@@ -84,6 +83,7 @@ def refresh(window, background):
         if event.type == pygame.QUIT: # If the user exits the window
             running = False
     return running
+
 def interact():
     ''' waits for the user to press a key and returns the key pressed'''
     pygame.event.clear()
@@ -115,6 +115,7 @@ def afficher_hp(hero, fenetre):
 
     image_coeur_vide =\
     pygame.transform.scale(pygame.image.load("assets/coeur_vide.png").convert_alpha(), (40,40))
+
     image_coeur = Char(image_coeur).image
     image_coeur_vide =Char(image_coeur_vide).image
     for heart in range(hero.hp_max):
@@ -143,7 +144,7 @@ def afficher_armure(fenetre, hero):
                              else 160 if armure == 'legs'
                              else 240))
     afficher_armure_points(fenetre, hero)
-        
+
 def afficher_armure_points(fenetre, hero):
     '''show the armor points on the screen'''
     image_armure = pygame.transform.scale(pygame.image.load(const.image_armure_points).convert_alpha(), (40,40))
@@ -156,5 +157,3 @@ def afficher_arme(fenetre, hero):
         image_weapon = \
             pygame.transform.scale(pygame.image.load(const.elem_type[hero.equipments]).convert_alpha(), (70,70))
         fenetre.blit(image_weapon, (125, 310))
-
-

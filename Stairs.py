@@ -1,3 +1,5 @@
+''' Stairs that goes down one floor.'''
+
 from Element import Element
 import theGame
 

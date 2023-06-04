@@ -1,13 +1,13 @@
 ''' Map module'''
 
+import random
+
 from Coord import Coord
 from Hero import Hero
 from Room import Room
 from Element import Element
 from Creature import Creature
-from utils import sign, min_cost
-
-import random
+from utils import sign
 
 class Map():
     """A map of a game floor.
@@ -55,8 +55,8 @@ class Map():
 
     def intersectNone(self, room):
         """Tests if the room shall intersect any room already in the map."""
-        for r in self._roomsToReach:
-            if room.intersect(r):
+        for rooms in self._roomsToReach:
+            if room.intersect(rooms):
                 return False
         return True
 
@@ -64,10 +64,10 @@ class Map():
         """Puts a ground cell at the given coord.
             If the coord corresponds to a room, considers the room reached."""
         self._mat[coord.y][coord.x] = Map.ground
-        r = self.findRoom(coord)
-        if r:
-            self._roomsToReach.remove(r)
-            self._rooms.append(r)
+        room = self.findRoom(coord)
+        if room:
+            self._roomsToReach.remove(room)
+            self._rooms.append(room)
 
     def corridor(self, cursor, end):
         """Digs a corridors from cursor to end, 

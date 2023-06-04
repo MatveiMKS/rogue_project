@@ -1,8 +1,9 @@
 ''' Contains the Creature class, which is a subclass of Element.'''
 
+import random
+
 from Element import Element
 import theGame
-import random
 
 class Creature(Element):
     """A creature that occupies the dungeon.

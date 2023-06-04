@@ -4,7 +4,6 @@ import Coord
 import Creature as cr
 import theGame
 from visuel import interact
-from utils import getch2
 
 def heal(creature, strength):
     """Heal the creature by strength points"""

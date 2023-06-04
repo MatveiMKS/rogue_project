@@ -51,7 +51,7 @@ class Hero(Creature):
     def description(self):
         """Description of the hero"""
         return Creature.description(self) + str(self._inventory) + f' Equipiments: {str(self.equipments)}' + f' Armor: {str(self.armor)}'
-    
+
     def is_full(self):
         ''' checks if inventory is full'''
         inv_size = self.level * 2 if self.level * 2 < 10 else 10

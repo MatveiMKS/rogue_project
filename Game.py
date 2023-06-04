@@ -1,6 +1,7 @@
 ''' Game module'''
 
 import random, copy
+import pygame
 
 from Equipment import Equipment
 from Creature import Creature
@@ -12,7 +13,7 @@ from handler import heal, teleport, shoot, askDirection
 from const import elem_type
 import theGame
 import visuel
-import pygame 
+
 
 
 class Game():
@@ -212,7 +213,7 @@ class Game():
         print(self._level)
         sens = 'z' if layout == 'f' else 'w'
         while self._hero.hp > 0 and running:
-            
+
             pygame.time.Clock().tick(60)
             pygame.display.flip()
             self._hero.sens = sens
