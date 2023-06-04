@@ -1,3 +1,5 @@
+'''Contains the paths to the images used in the game'''
+
 ##FLOOR##
 image_sol = "assets/floor_tiles.jpg"
 image_sol_2 = "assets/floor_tiles_2.jpg"
@@ -30,10 +32,10 @@ image_strong_dragon = "assets/dragon_strong.png"
 image_weak_dragon = "assets/dragon_weak.png"
 image_dragon = "assets/dragon.png"
 
-##BATS##
-image_bat = "assets/drone.png"
-image_weak_bat = "assets/drone_weak.png"
-image_strong_bat = "assets/drone_strong.png"
+##droneS##
+image_drone = "assets/drone.png"
+image_weak_drone = "assets/drone_weak.png"
+image_strong_drone = "assets/drone_strong.png"
 
 ##BLOBS##
 image_strong_blob = "assets/blob_strong.png"
@@ -45,20 +47,22 @@ image_strong_ork = "assets/ork_strong.png"
 image_weak_ork = "assets/ork_weak.png"
 image_ork = "assets/ork.png"
 
-##GOBLINS##
-image_strong_goblin = "assets/goblin_strong.png"
-image_weak_goblin = "assets/goblin_weak.png"
-image_goblin = "assets/goblin.png"
+##ROBOT##
+image_strong_robot = "assets/robot_strong.png"
+image_weak_robot = "assets/robot_weak.png"
+image_robot = "assets/robot.png"
 
 ##ELEMENTS##
 image_stairs = "assets/stairs.png"
-image_potion = "assets/potion.png"
 image_gold = "assets/gold.png"
+image_potion = "assets/potion.png"
+image_small_potion = "assets/small_potion.png"
+image_big_potion = "assets/medium_potion.png"
+image_portoloin = "assets/portoloin.png"
 
 ##WEAPONS##
 image_throwing = "assets/bow.png"
 image_epee = "assets/epee.png"
-
 image_axe = "assets/axe.png"
 image_longsword = "assets/longsword.png"
 image_dagger = "assets/dagger.png"
@@ -80,28 +84,29 @@ image_rare_chest = "assets/rare_chest.png"
 image_rare_pants = "assets/rare_pants.png"
 image_rare_boots = "assets/rare_boots.png"
 
-elem_type = {"Goblin" :  image_goblin,
+elem_type = {"Robot" :  image_robot,
                 "Blob" :  image_blob,
-                "Bat" :  image_bat,
+                "Drone" :  image_drone,
                 "Ork" :  image_ork,
                 "Dragon" :  image_dragon,
 
-                "Weak Goblin" :  image_weak_goblin,
+                "Weak Robot" :  image_weak_robot,
                 "Weak Blob" :  image_weak_blob,
-                "Weak Bat" :  image_weak_bat,
+                "Weak Drone" :  image_weak_drone,
                 "Weak Ork" :  image_weak_ork,
                 "Weak Dragon" :  image_weak_dragon,
-                
-                "Strong Goblin" :  image_strong_goblin,
+
+                "Strong Robot" :  image_strong_robot,
                 "Strong Blob" :  image_strong_blob,
-                "Strong Bat" :  image_strong_bat,
+                "Strong Drone" :  image_strong_drone,
                 "Strong Ork" :  image_strong_ork,
                 "Strong Dragon" :  image_strong_dragon,
 
-                "small potion":  image_potion,
+                "small potion":  image_small_potion,
                 "medium potion":  image_potion,
-                "big potion":  image_potion,
-                "portoloin":  image_potion,
+                "big potion":  image_big_potion,
+
+                "portoloin":  image_portoloin,
                 "gold":  image_gold,
                 "Stairs":  image_stairs,
                 "throwing knife":  image_throwing,

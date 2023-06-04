@@ -1,3 +1,5 @@
+''' Contains the class for the coordinates of the game'''
+
 import math
 
 class Coord():
@@ -27,7 +29,7 @@ class Coord():
     cos45 = 1 / math.sqrt(2)
 
     def direction(self, other):
-        """Returns the direction between two coordinates."""
+        """Returns the direction of other compared to self."""
         d = self - other
         cos = d.x / self.distance(other)
         if cos > Coord.cos45:
