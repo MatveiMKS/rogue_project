@@ -41,24 +41,24 @@ class Game():
                       ],
                   }
 
-    monsters = {0: [Creature("Weak Goblin", 4, 'G'),
-                    Creature("Weak Bat", 2, "W")],
+    monsters = {0: [Creature("Weak Robot", 4, 'G'),
+                    Creature("Weak Drone", 2, "W")],
 
                 1: [Creature("Weak Ork", 6, 'O', strength=2),
                     Creature("Weak Blob", 10, 'B')],
 
                 5: [Creature("Weak Dragon", 20, 'D', strength=3)]}
 
-    mid_monsters = {0: [Creature("Goblin", 6, 'G', strength=2),
-                        Creature("Bat", 3, "W")],
+    mid_monsters = {0: [Creature("Robot", 6, 'G', strength=2),
+                        Creature("Drone", 3, "W")],
 
                     1: [Creature("Ork", 9, 'O', strength=3),
                         Creature("Blob", 15, 'B', strength=2)],
 
                     5: [Creature("Dragon", 30, 'D', strength=5)]}
 
-    strong_monsters = {0: [Creature("Strong Goblin", 9, 'G', strength=3),
-                           Creature("Strong Bat", 5, "W", strength=2)],
+    strong_monsters = {0: [Creature("Strong Robot", 9, 'G', strength=3),
+                           Creature("Strong Drone", 5, "W", strength=2)],
 
                         1: [Creature("Strong Ork", 13, 'O', strength=4),
                         Creature("Strong Blob", 20, 'B', strength=3)],
