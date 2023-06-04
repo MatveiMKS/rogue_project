@@ -57,7 +57,7 @@ image_stairs = "assets/stairs.png"
 image_gold = "assets/gold.png"
 image_potion = "assets/potion.png"
 image_small_potion = "assets/small_potion.png"
-image_big_potion = "assets/medium_potion.png"
+image_big_potion = "assets/big_potion.png"
 image_portoloin = "assets/portoloin.png"
 
 ##WEAPONS##

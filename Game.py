@@ -191,6 +191,9 @@ class Game():
     def play(self):
         running = True
         window, background = visuel.initialisation()
+        tuto = pygame.image.load("assets/tuto.jpg").convert()
+        window.blit(tuto, (0,0))
+        pygame.display.flip()
         self.change_layout()
         layout = self.layout
         if layout == 'f':
