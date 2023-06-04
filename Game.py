@@ -90,15 +90,28 @@ class Game():
                     'e' : lambda h: theGame.theGame()._floor.move(h, Coord(1,-1)),
                     'x' : lambda h: theGame.theGame()._floor.move(h, Coord(1,1)), 
                     'z' : lambda h: theGame.theGame()._floor.move(h, Coord(-1,1)),
-                    'i': lambda h: theGame.theGame().addMessage(h.fullDescription()),
+                    #'i': lambda h: theGame.theGame().addMessage(h.fullDescription()),
                     'k': lambda h: h.kill(),
-                    'u': lambda h: h.use(theGame.theGame().select(h._inventory)),
+                    #'u': lambda h: h.use(theGame.theGame().select(h._inventory)),
                     ' ': lambda h: None,
                     'h': lambda hero: theGame.theGame().addMessage("Available actions : " + str(list(Game._actions_wasd.keys()))),
-                    'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name),
+                    #'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name),
                     'r': lambda h: h.drop(theGame.theGame().select(h._inventory))
                     }
     _actions_wasd.update({
+                        '0' : lambda h: h.use(h._inventory[0]) if len(h._inventory) > 0 else None,
+                        '1' : lambda h: h.use(h._inventory[1]) if len(h._inventory) > 1 else None,
+                        '2' : lambda h: h.use(h._inventory[2]) if len(h._inventory) > 2 else None,
+                        '3' : lambda h: h.use(h._inventory[3]) if len(h._inventory) > 3 else None,
+                        '4' : lambda h: h.use(h._inventory[4]) if len(h._inventory) > 4 else None,
+                        '5' : lambda h: h.use(h._inventory[5]) if len(h._inventory) > 5 else None,
+                        '6' : lambda h: h.use(h._inventory[6]) if len(h._inventory) > 6 else None,
+                        '7' : lambda h: h.use(h._inventory[7]) if len(h._inventory) > 7 else None,
+                        '8' : lambda h: h.use(h._inventory[8]) if len(h._inventory) > 8 else None,
+                        '9' : lambda h: h.use(h._inventory[9]) if len(h._inventory) > 9 else None,
+                    })
+    
+    _actions.update({
                         '0' : lambda h: h.use(h._inventory[0]) if len(h._inventory) > 0 else None,
                         '1' : lambda h: h.use(h._inventory[1]) if len(h._inventory) > 1 else None,
                         '2' : lambda h: h.use(h._inventory[2]) if len(h._inventory) > 2 else None,
@@ -133,6 +146,9 @@ class Game():
         """Creates a map for the current floor."""
         self._floor = Map(hero=self._hero)
         self._floor.put(self._floor._rooms[-1].center(), Stairs())
+        if self._level//10 == 0 and self._level > 1:
+            if len(self._floor._rooms) > 1:
+                self._floor.put(self._floor._rooms[-2].center(), Creature(name="Boss", hp=40*self._level//10, abbrv="N", strength=6*self._level//10))
         self._level += 1
 
     def addMessage(self, msg):
@@ -177,6 +193,9 @@ class Game():
     def play(self):
         running = True
         window, background = visuel.initialisation()
+        tuto = pygame.image.load("assets/tuto.jpg").convert()
+        window.blit(tuto, (0,0))
+        pygame.display.flip()
         self.change_layout()
         layout = self.layout
         if layout == 'f':

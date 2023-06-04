@@ -13,8 +13,6 @@ class Creature(Element):
         Element.__init__(self, name, abbrv)
         self.hp = hp
         self.strength = strength
-        
-
 
     def description(self):
         """Description of the creature"""
@@ -35,7 +33,14 @@ class Creature(Element):
         else:
             theGame.theGame().addMessage(f"The {other.name} hits the {self.name}"
                                          f" for {damage} damage")
+
         if self.hp > 0:
+            if self.name == "boss":
+                # could be replaced by the function teleport in handler but causes circular import
+                room = theGame.theGame()._floor.randRoom()
+                destination = room.randEmptyCoord(theGame.theGame()._floor)
+                theGame.theGame()._floor.rm(theGame.theGame()._floor.pos(self))
+                theGame.theGame()._floor.put(destination, self)
             return False
         other.xp += self.strength * 2
         other.level_up()

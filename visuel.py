@@ -61,6 +61,8 @@ def initialisation():
     ''' initializes the window and the background'''
     pygame.init()
     # Background
+
+
     background = pygame.image.load("assets/bg.jpg")
 
     # Window
