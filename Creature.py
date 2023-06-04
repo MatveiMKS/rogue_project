@@ -35,7 +35,7 @@ class Creature(Element):
                                          f" for {damage} damage")
 
         if self.hp > 0:
-            if self.name == "boss":
+            if self.name == "Boss":
                 # could be replaced by the function teleport in handler but causes circular import
                 room = theGame.theGame()._floor.randRoom()
                 destination = room.randEmptyCoord(theGame.theGame()._floor)
