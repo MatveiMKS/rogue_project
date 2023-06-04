@@ -102,8 +102,6 @@ def affiche_inventory(hero, fenetre, elem_type):
     for num_case, elements in enumerate(hero._inventory):
         image = pygame.transform.scale(Char(pygame.image.load(elem_type[elements.name]).convert_alpha()).image, (72,72))
         fenetre.blit(image, (904 if num_case < 6 else 948, 120 + num_case*80))
-        num_case += 80
-        num_object += 1
 
 def afficher_hp(hero, fenetre):
     ''' shows the hp on the screen'''
