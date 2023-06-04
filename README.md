@@ -47,7 +47,7 @@ Touche de debuggage : i
 OS : Windows 10
 
 ## Requirements 
-- pygame 3.4.0
+- pygame 2.4.0
 - math
 - random
 - copy
