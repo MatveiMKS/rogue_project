@@ -44,12 +44,12 @@ Total: 17 points / 15 nécessaires
 - magie (Theophile) 
 - add boss
 
-## Version:
+## Versions:
  - python : 3.11.3
  - pygame : 2.4.0
 OS : Windows 10
 
-## Requirements 
+## Requirements:
 - pygame
 - math
 - random
