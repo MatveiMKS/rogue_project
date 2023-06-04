@@ -3,6 +3,7 @@ image_sol = "assets/floor_tiles.jpg"
 image_sol_2 = "assets/floor_tiles_2.jpg"
 image_sol_3 = "assets/floor_tiles_3.jpg"
 image_sol_4 = "assets/floor_tiles_4.jpg"
+images_sol = [image_sol, image_sol_2, image_sol_3, image_sol_4]
 
 ##HERO##
 image_hero = "assets/hero_up.png"
