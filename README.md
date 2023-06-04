@@ -24,7 +24,7 @@ Touche de debuggage : i
 
 ## Fonctionnalités implétementées en plus:
 - option de choix de disposition clavier (1)
-- déplacement en diagonale 
+- déplacement en diagonale (1)
 - add items:
     1. Potions (small, medium, big) (1)
     2. Weapoms (add strenght) (1)
@@ -36,6 +36,8 @@ Touche de debuggage : i
 - add ability to drop items (1)
 - interface graphique (4)
 - visibility fog (3)
+
+Total: 17 points / 15 nécessaires
 ## Fonctionnalités à implementer:
 - pathfinding (Matvei)
 - magie (Theophile) 
@@ -43,11 +45,11 @@ Touche de debuggage : i
 
 ## Version:
  - python : 3.11.3
- - pygame : 3.4.0
+ - pygame : 2.4.0
 OS : Windows 10
 
 ## Requirements 
-- pygame 2.4.0
+- pygame
 - math
 - random
 - copy
