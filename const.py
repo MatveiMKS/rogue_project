@@ -23,7 +23,16 @@ hero_images_e = {
 
 ##MONSTERS##
 image_monsters = "assets/monster.png"
-image_bat = "assets/bat.jpg"
+
+##DRAGONS##
+image_strong_dragon = "assets/dragon_strong.png"
+image_weak_dragon = "assets/dragon_weak.png"
+image_dragon = "assets/dragon.png"
+
+##BATS##
+image_bat = "assets/drone.png"
+image_weak_bat = "assets/drone_weak.png"
+image_strong_bat = "assets/drone_strong.png"
 
 ##BLOBS##
 image_strong_blob = "assets/blob_strong.png"
@@ -70,21 +79,21 @@ image_rare_boots = "assets/rare_boots.png"
 
 elem_type = {"Goblin" :  image_goblin,
                 "Blob" :  image_blob,
-                "Bat" :  image_monsters,
+                "Bat" :  image_bat,
                 "Ork" :  image_ork,
-                "Dragon" :  image_monsters,
+                "Dragon" :  image_dragon,
 
                 "Weak Goblin" :  image_weak_goblin,
                 "Weak Blob" :  image_weak_blob,
-                "Weak Bat" :  image_bat,
+                "Weak Bat" :  image_weak_bat,
                 "Weak Ork" :  image_weak_ork,
-                "Weak Dragon" :  image_monsters,
+                "Weak Dragon" :  image_weak_dragon,
                 
                 "Strong Goblin" :  image_strong_goblin,
                 "Strong Blob" :  image_strong_blob,
-                "Strong Bat" :  image_monsters,
+                "Strong Bat" :  image_strong_bat,
                 "Strong Ork" :  image_strong_ork,
-                "Strong Dragon" :  image_monsters,
+                "Strong Dragon" :  image_strong_dragon,
 
                 "small potion":  image_potion,
                 "medium potion":  image_potion,
