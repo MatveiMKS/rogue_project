@@ -147,6 +147,9 @@ class Game():
         """Creates a map for the current floor."""
         self._floor = Map(hero=self._hero)
         self._floor.put(self._floor._rooms[-1].center(), Stairs())
+        if self._level//10 == 0 and self._level > 1:
+            if len(self._floor._rooms) > 1:
+                self._floor.put(self._floor._rooms[-2].center(), Creature(name="Boss", hp=40*self._level//10, abbrv="N", strength=6*self._level//10))
         self._level += 1
 
     def addMessage(self, msg):

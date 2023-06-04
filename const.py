@@ -52,6 +52,9 @@ image_strong_robot = "assets/robot_strong.png"
 image_weak_robot = "assets/robot_weak.png"
 image_robot = "assets/robot.png"
 
+##BOSS##
+image_boss = "assets/boss.png"
+
 ##ELEMENTS##
 image_stairs = "assets/stairs.png"
 image_gold = "assets/gold.png"
@@ -101,6 +104,8 @@ elem_type = {"Robot" :  image_robot,
                 "Strong Drone" :  image_strong_drone,
                 "Strong Ork" :  image_strong_ork,
                 "Strong Dragon" :  image_strong_dragon,
+
+                "Boss" :  image_boss,
 
                 "small potion":  image_small_potion,
                 "medium potion":  image_potion,
