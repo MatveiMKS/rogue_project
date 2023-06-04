@@ -36,6 +36,7 @@ Touche de debuggage : i
 - add ability to drop items (1)
 - interface graphique (4)
 - visibility fog (3)
+- add boss (1)
 
 Total: 17 points / 15 nécessaires
 ## Fonctionnalités à implementer:
